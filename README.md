@@ -62,3 +62,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## How to start the project
+To start the proyect you would have to do the following things:
+* install mysql
+* install composer for laravel
+* create a database "parqueoumss"
+* update the .env file where "DB_CONNECTION=mysql" with : 
+```
+DB_PASSWORD={your_password}
+```
+* Execute the following commands in order
+```
+composer install
+php artisan serve
+```
+## To create models, Controllers
+```
+php artisan make:model Sitio
+php artisan make:controller API/SitioController --api
+```
