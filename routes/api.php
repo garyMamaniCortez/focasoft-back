@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EventoController;
+use App\Http\Controllers\API\FormularioRegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,8 @@ Route::get('/eventos',[EventoController::class, 'index']);
 Route::get('/evento/{id}',[EventoController::class, 'show']);
 Route::post('evento/', [EventoController::class, 'store']);
 Route::put('/evento/{id}',[EventoController::class, 'update']);
+
+Route::get('/formularios/registros',[FormularioRegistroController::class, 'index']);
+Route::get('/formularios/registro/{id}',[FormularioRegistroController::class, 'show']);
+Route::post('/formularios/registro',[FormularioRegistroController::class, 'store']);
+Route::put('/formularios/registro/{id}',[FormularioRegistroController::class, 'update']);
