@@ -68,8 +68,10 @@ CREATE TABLE `formulario` (
   `carnet_identidad` tinyint(1) DEFAULT NULL,
   `codigo_sis_o_institucion` tinyint(1) DEFAULT NULL,
   `semestre` tinyint(1) DEFAULT NULL,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +80,7 @@ CREATE TABLE `formulario` (
 
 LOCK TABLES `formulario` WRITE;
 /*!40000 ALTER TABLE `formulario` DISABLE KEYS */;
+INSERT INTO `formulario` VALUES (1,1,1,1,1,1,1,1,1,1,1,'2023-10-12 16:43:14','2023-10-12 12:04:11'),(2,1,1,1,1,1,1,0,0,1,1,'2023-10-12 16:22:43','2023-10-12 16:22:43'),(3,1,1,1,1,1,0,0,0,0,0,'2023-10-12 16:39:05','2023-10-12 16:39:05');
 /*!40000 ALTER TABLE `formulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-12  9:48:26
+-- Dump completed on 2023-10-12 12:46:18
