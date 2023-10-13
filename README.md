@@ -66,10 +66,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 To start the proyect you would have to do the following things:
 * install mysql
 * install composer for laravel
-* create a database "parqueoumss"
+* create a database "focasoft"
+* Copy the .env.example file to .env file
 * update the .env file where "DB_CONNECTION=mysql" with : 
 ```
 DB_PASSWORD={your_password}
+```
+* Log in into your mysql terminal and execute the following commands:
+```
+USE focasoft;
+SOURCE script.sql;
 ```
 * Execute the following commands in order
 ```
