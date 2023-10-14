@@ -45,7 +45,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES (1,'Título del evento','2023-08-05','taller_de_entrenamiento','Descripción del evento',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(2,'Evento competitivo','2023-04-05','taller_de_entrenamiento','Descripción del evento a toda madre',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(3,'Evento a toda leche de programacion','2023-10-30','clasificatorio_interno','Evento que te hara poner los pelos de punta',NULL,NULL,'2023-10-12 13:43:38','2023-10-12 13:26:41',NULL);
+INSERT INTO `evento` VALUES (1,'Título del evento','2023-08-05','taller_de_entrenamiento','Descripción del evento',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(2,'Evento competitivo','2023-04-05','taller_de_entrenamiento','Descripción del evento a toda madre',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(3,'Evento a toda leche de programacion','2023-10-30','clasificatorio_interno','Evento que te hara poner los pelos de punta',NULL,1,'2023-10-12 19:44:27','2023-10-12 13:26:41',NULL);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,10 +104,12 @@ CREATE TABLE `participante` (
   `codigo_sis_o_institucion` varchar(20) DEFAULT NULL,
   `semestre` int DEFAULT NULL,
   `id_formulario` int NOT NULL,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `id_formulario` (`id_formulario`),
   CONSTRAINT `participante_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formulario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +118,7 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
+INSERT INTO `participante` VALUES (1,'gary','mamani','2001-10-22','garymamani12@gmail.com','65385951','Sistemas',NULL,NULL,NULL,NULL,1,'2023-10-13 13:52:04','2023-10-13 13:50:58');
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -128,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-12 12:46:18
+-- Dump completed on 2023-10-13  9:53:20
