@@ -35,6 +35,10 @@ class EventoController extends Controller
         $evento->descripcion = $request->input('descripcion');
         $evento->afiche = $request->input('afiche');
         $evento->id_formulario = $request->input('id_formulario');
+        $evento->requisitos = $request->input('requisitos');
+        $evento->premios = $request->input('premios');
+        $evento->pratocinadores = $request->input('pratocinadores');
+        $evento->contactos = $request->input('contactos');
         try {
             $evento->save();
         } catch (\Exception $e) {
@@ -72,6 +76,10 @@ class EventoController extends Controller
         $evento->descripcion = $request->input('descripcion');
         $evento->afiche = $request->input('afiche');
         $evento->id_formulario = $request->input('id_formulario');
+        $evento->requisitos = $request->input('requisitos');
+        $evento->premios = $request->input('premios');
+        $evento->pratocinadores = $request->input('pratocinadores');
+        $evento->contactos = $request->input('contactos');
 
         try {
             $evento->save();

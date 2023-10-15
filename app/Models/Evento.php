@@ -15,7 +15,11 @@ class Evento extends Model
         'tipo',
         'descripcion',
         'afiche',
-        'id_formulario'
+        'id_formulario',
+        'requisitos',
+        'premios',
+        'pratocinadores',
+        'contactos'
     ];
     protected $hidden = [
         'created_at',

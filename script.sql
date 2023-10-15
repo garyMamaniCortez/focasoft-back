@@ -33,6 +33,10 @@ CREATE TABLE `evento` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_fin` date DEFAULT NULL,
+  `requisitos` varchar(1000) DEFAULT NULL,
+  `premios` varchar(1000) DEFAULT NULL,
+  `pratocinadores` varchar(1000) DEFAULT NULL,
+  `contactos` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_formulario` (`id_formulario`),
   CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formulario` (`id`)
@@ -45,7 +49,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES (1,'Título del evento','2023-08-05','taller_de_entrenamiento','Descripción del evento',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(2,'Evento competitivo','2023-04-05','taller_de_entrenamiento','Descripción del evento a toda madre',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL),(3,'Evento a toda leche de programacion','2023-10-30','clasificatorio_interno','Evento que te hara poner los pelos de punta',NULL,1,'2023-10-12 19:44:27','2023-10-12 13:26:41',NULL);
+INSERT INTO `evento` VALUES (1,'Título del evento','2023-08-05','taller_de_entrenamiento','Descripción del evento',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL,NULL,NULL,NULL,NULL),(2,'Evento competitivo','2023-04-05','taller_de_entrenamiento','Descripción del evento a toda madre',NULL,NULL,'2023-10-12 09:23:03','2023-10-12 09:23:03',NULL,NULL,NULL,NULL,NULL),(3,'Evento a toda leche de programacion','2023-10-30','clasificatorio_interno','Evento que te hara poner los pelos de punta',NULL,1,'2023-10-12 19:44:27','2023-10-12 13:26:41',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-13  9:53:20
+-- Dump completed on 2023-10-15 19:27:32
