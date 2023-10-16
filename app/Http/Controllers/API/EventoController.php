@@ -27,18 +27,13 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        $evento = new Evento;
-        $evento->titulo = $request->input('titulo');
-        $evento->fecha_ini = $request->input('fecha_ini');
-        $evento->fecha_fin = $request->input('fecha_fin');
-        $evento->tipo = $request->input('tipo');
-        $evento->descripcion = $request->input('descripcion');
-        $evento->afiche = $request->input('afiche');
-        $evento->id_formulario = $request->input('id_formulario');
-        $evento->requisitos = $request->input('requisitos');
-        $evento->premios = $request->input('premios');
-        $evento->pratocinadores = $request->input('pratocinadores');
-        $evento->contactos = $request->input('contactos');
+        if(!$this->isValidTittle($request))
+        {
+            return response()->json([
+                "error" => "El titulo del evento ya existe"
+              ], 400);
+        }
+        $evento = $this->createEvento($request, null);
         try {
             $evento->save();
         } catch (\Exception $e) {
@@ -68,18 +63,13 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $evento = Evento::findOrFail($id);
-        $evento->titulo = $request->input('titulo');
-        $evento->fecha_ini = $request->input('fecha_ini');
-        $evento->fecha_fin = $request->input('fecha_fin');
-        $evento->tipo = $request->input('tipo');
-        $evento->descripcion = $request->input('descripcion');
-        $evento->afiche = $request->input('afiche');
-        $evento->id_formulario = $request->input('id_formulario');
-        $evento->requisitos = $request->input('requisitos');
-        $evento->premios = $request->input('premios');
-        $evento->pratocinadores = $request->input('pratocinadores');
-        $evento->contactos = $request->input('contactos');
+        if(!$this->isValidTittleWithId($request, $id))
+        {
+            return response()->json([
+                "error" => "El titulo del evento ya existe"
+              ], 400);
+        }
+        $evento = $this->createEvento($request, $id);
 
         try {
             $evento->save();
@@ -99,5 +89,55 @@ class EventoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function createEvento(Request $request, $id)
+    {
+        $evento = new Evento;
+        if ($id != null)
+        {
+            $evento = Evento::findOrFail($id);
+        }
+        $evento->titulo = $request->input('titulo');
+        $evento->fecha_ini = $request->input('fecha_ini');
+        $evento->fecha_fin = $request->input('fecha_fin');
+        $evento->tipo = $request->input('tipo');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->afiche = $request->input('afiche');
+        $evento->id_formulario = $request->input('id_formulario');
+        $evento->requisitos = $request->input('requisitos');
+        $evento->premios = $request->input('premios');
+        $evento->pratocinadores = $request->input('pratocinadores');
+        $evento->contactos = $request->input('contactos');
+
+        return $evento;
+    }
+
+    private function isValidTittle(Request $request)
+    {
+        $eventos = Evento::all();
+        $response = true;
+        foreach ($eventos as $evento)
+        {
+            if($evento->titulo === $request->input('titulo'))
+            {
+                $response = false;
+            }
+        }
+        return $response;
+    }
+
+    private function isValidTittleWithId(Request $request, $id)
+    {
+        $eventos = Evento::all();
+        $response = true;
+        foreach ($eventos as $evento)
+        {
+            if($evento->titulo === $request->input('titulo') && $evento->id != $id)
+            {
+                $response = false;
+            }
+        }
+        return $response;
     }
 }
