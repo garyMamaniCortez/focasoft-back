@@ -105,7 +105,7 @@ class EventoController extends Controller
         $evento->titulo = $request->input('titulo');
         $evento->fecha_ini = $request->input('fecha_ini');
         $evento->fecha_fin = $request->input('fecha_fin');
-        $evento->tipo = $request->input('tipo');
+        $evento->tipo = $this->validateTipoEvento($request->input('tipo'));
         $evento->descripcion = $request->input('descripcion');
         $evento->afiche = $request->input('afiche');
         $evento->id_formulario = $request->input('id_formulario');
@@ -167,5 +167,29 @@ class EventoController extends Controller
                 $evento->tipo = 'indefinido';
                 break;
         }
+    }
+    private function validateTipoEvento($tipo)
+    {
+        switch ($tipo) {
+            case 'Reclutamiento':
+                $tipo = 'reclutamiento';
+                break;
+            case 'Taller de entrenamiento':
+                $tipo = 'taller_de_entrenamiento';
+                break;
+            case 'Competencia de entrenamiento':
+                $tipo = 'competencia_de_entrenamiento';
+                break;
+            case 'Clasificatorio interno':
+                $tipo = 'clasificatorio_interno';
+                break;
+            case 'Competencia':
+                $tipo = 'competencia';
+                break;
+            default:
+                $tipo = 'indefinido';
+                break;
+        }
+        return $tipo;
     }
 }
