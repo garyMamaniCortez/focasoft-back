@@ -16,6 +16,10 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::all();
+        foreach ($eventos as $evento)
+        {
+            $evento = $this->translateTipoEvento($evento);
+        }
         return response()->json($eventos);
     }
 
@@ -139,5 +143,29 @@ class EventoController extends Controller
             }
         }
         return $response;
+    }
+
+    private function translateTipoEvento($evento)
+    {
+        switch ($evento->tipo) {
+            case 'reclutamiento':
+                $evento->tipo = 'Reclutamiento';
+                break;
+            case 'taller_de_entrenamiento':
+                $evento->tipo = 'Taller de entrenamiento';
+                break;
+            case 'competencia_de_entrenamiento':
+                $evento->tipo = 'Competencia de entrenamiento';
+                break;
+            case 'clasificatorio_interno':
+                $evento->tipo = 'Clasificatorio interno';
+                break;
+            case 'competencia':
+                $evento->tipo = 'Competencia';
+                break;
+            default:
+                $evento->tipo = 'indefinido';
+                break;
+        }
     }
 }
