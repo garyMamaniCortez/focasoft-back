@@ -111,7 +111,7 @@ class EventoController extends Controller
         $evento->id_formulario = $request->input('id_formulario');
         $evento->requisitos = $request->input('requisitos');
         $evento->premios = $request->input('premios');
-        $evento->pratocinadores = $request->input('pratocinadores');
+        $evento->patrocinadores = $request->input('patrocinadores');
         $evento->contactos = $request->input('contactos');
 
         return $evento;
