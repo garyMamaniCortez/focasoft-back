@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Models\Evento;
 
 class EventoController extends Controller
@@ -19,6 +20,7 @@ class EventoController extends Controller
         foreach ($eventos as $evento)
         {
             $evento = $this->translateTipoEvento($evento);
+            $evento->afiche = $this->getImageURL($evento->id);
         }
         return response()->json($eventos);
     }
@@ -55,7 +57,24 @@ class EventoController extends Controller
     public function show($id)
     {
         $evento = Evento::find($id);
+        $evento = $this->translateTipoEvento($evento);
+        $evento->afiche = $this->getImageURL($id);
         return response()->json($evento);
+    }
+
+    public function getImage($id)
+    {
+        $evento = Evento::find($id);
+        if($evento->afiche != null)
+        {
+            if (filter_var($evento->afiche, FILTER_VALIDATE_URL))
+                return $evento->afiche;
+            $base64Image = $evento->afiche;
+            return response(base64_decode($base64Image),200)->header('Content-Type','image/jpeg');
+        }else
+        {
+            return "";
+        }
     }
 
     /**
@@ -107,7 +126,13 @@ class EventoController extends Controller
         $evento->fecha_fin = $request->input('fecha_fin');
         $evento->tipo = $this->validateTipoEvento($request->input('tipo'));
         $evento->descripcion = $request->input('descripcion');
+
         $evento->afiche = $request->input('afiche');
+        if($request->hasfile('afiche'))
+        {
+            $image = $request->file('afiche');
+            $evento->afiche = base64_encode(file_get_contents($image->path()));
+        }
         $evento->id_formulario = $request->input('id_formulario');
         $evento->requisitos = $request->input('requisitos');
         $evento->premios = $request->input('premios');
@@ -167,6 +192,7 @@ class EventoController extends Controller
                 $evento->tipo = 'indefinido';
                 break;
         }
+        return $evento;
     }
     private function validateTipoEvento($tipo)
     {
@@ -191,5 +217,10 @@ class EventoController extends Controller
                 break;
         }
         return $tipo;
+    }
+
+    private function getImageURL($id)
+    {
+        return "localhost:8000/api/evento/imagen/{$id}";
     }
 }
