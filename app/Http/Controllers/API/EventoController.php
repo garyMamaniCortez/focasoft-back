@@ -117,14 +117,16 @@ class EventoController extends Controller
     private function createEvento(Request $request, $id)
     {
         $evento = new Evento;
+        $tipo = $this->validateTipoEvento($request->input('tipo'));
         if ($id != null)
         {
             $evento = Evento::findOrFail($id);
+            $tipo = $evento->tipo;
         }
         $evento->titulo = $request->input('titulo');
         $evento->fecha_ini = $request->input('fecha_ini');
         $evento->fecha_fin = $request->input('fecha_fin');
-        $evento->tipo = $this->validateTipoEvento($request->input('tipo'));
+        $evento->tipo = $tipo;
         $evento->descripcion = $request->input('descripcion');
 
         $evento->afiche = $request->input('afiche');
