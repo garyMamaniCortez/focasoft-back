@@ -201,6 +201,9 @@ class EventoController extends Controller
     private function translateEvento($evento)
     {
         $evento = $this->translateTipoEvento($evento);
+        if ($evento->afiche == null)
+            return $evento;
+
         $evento->afiche = $this->getImageURL($evento->id);
         return $evento;
     }
