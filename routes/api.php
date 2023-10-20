@@ -23,9 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/eventos',[EventoController::class, 'index']);
 Route::get('/evento/{id}',[EventoController::class, 'show']);
-Route::post('evento/', [EventoController::class, 'store']);
+Route::post('/evento/', [EventoController::class, 'store']);
 Route::put('/evento/{id}',[EventoController::class, 'update']);
 Route::get('/evento/imagen/{id}',[EventoController::class, 'getImage']);
+Route::post('/evento/buscar', [EventoController::class, 'buscar']);
 
 Route::get('/formularios/registros',[FormularioRegistroController::class, 'index']);
 Route::get('/formularios/registro/{id}',[FormularioRegistroController::class, 'show']);

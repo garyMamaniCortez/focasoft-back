@@ -19,8 +19,7 @@ class EventoController extends Controller
         $eventos = Evento::all();
         foreach ($eventos as $evento)
         {
-            $evento = $this->translateTipoEvento($evento);
-            $evento->afiche = $this->getImageURL($evento->id);
+            $evento = $this->translateEvento($evento);
         }
         return response()->json($eventos);
     }
@@ -57,8 +56,7 @@ class EventoController extends Controller
     public function show($id)
     {
         $evento = Evento::find($id);
-        $evento = $this->translateTipoEvento($evento);
-        $evento->afiche = $this->getImageURL($id);
+        $evento = $this->translateEvento($evento);
         return response()->json($evento);
     }
 
@@ -112,6 +110,34 @@ class EventoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function buscar(Request $request)
+    {
+        $busqueda = $request->input('busqueda');
+        $titulosEventos = Evento::where('titulo','like',"%{$busqueda}%")->get();
+        $tiposEventos = Evento::where('tipo', 'like', "%{$busqueda}%")->get();
+
+        $arrayEventos = null;
+        if (count($titulosEventos) == 0 && count($tiposEventos) == 0) {
+            return response()->json([
+                'error' => 'No se encontraron eventos que coincidan con la búsqueda.',
+            ], 404);
+        }elseif (count($titulosEventos) == 0) {
+            $arrayEventos = $tiposEventos->toArray();
+        }elseif (count($tiposEventos) == 0) {
+            $arrayEventos = $titulosEventos->toArray();
+        }else {
+            $arrayEventos = array_merge($titulosEventos->toArray(), $tiposEventos->toArray());
+            $arrayEventos = array_unique($arrayEventos);
+        }
+
+        $eventos = $this->arrayObjetosToArrayEventos($arrayEventos);
+        foreach ($eventos as $evento)
+        {
+            $evento = $this->translateEvento($evento);
+        }
+        return response()->json($eventos, 200);
     }
 
     private function createEvento(Request $request, $id)
@@ -172,6 +198,13 @@ class EventoController extends Controller
         return $response;
     }
 
+    private function translateEvento($evento)
+    {
+        $evento = $this->translateTipoEvento($evento);
+        $evento->afiche = $this->getImageURL($evento->id);
+        return $evento;
+    }
+
     private function translateTipoEvento($evento)
     {
         switch ($evento->tipo) {
@@ -224,5 +257,31 @@ class EventoController extends Controller
     private function getImageURL($id)
     {
         return "localhost:8000/api/evento/imagen/{$id}";
+    }
+
+    private function arrayObjetosToArrayEventos(array $arrayObjetos)
+    {
+        $arrayEventos = [];
+
+        foreach ($arrayObjetos as $objeto) {
+            $evento = new Evento();
+
+            $evento->id = $objeto['id'];
+            $evento->titulo = $objeto['titulo'];
+            $evento->fecha_ini = $objeto['fecha_ini'];
+            $evento->tipo = $objeto['tipo'];
+            $evento->descripcion = $objeto['descripcion'];
+            $evento->afiche = $objeto['afiche'];
+            $evento->id_formulario = $objeto['id_formulario'];
+            $evento->fecha_fin = $objeto['fecha_fin'];
+            $evento->requisitos = $objeto['requisitos'];
+            $evento->premios = $objeto['premios'];
+            $evento->patrocinadores = $objeto['patrocinadores'];
+            $evento->contactos = $objeto['contactos'];
+
+            $arrayEventos[] = $evento;
+        }
+
+        return $arrayEventos;
     }
 }
