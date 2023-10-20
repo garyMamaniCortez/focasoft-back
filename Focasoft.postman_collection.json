@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "d1abe559-f71c-4b6d-bbfa-5285773ccf6e",
+		"name": "Focasoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8804905"
+	},
+	"item": [
+		{
+			"name": "Evento",
+			"item": [
+				{
+					"name": "Eventos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/eventos",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"eventos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/evento/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"busqueda\": \"competencia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/evento/buscar",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento",
+								"buscar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento Imagen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/evento/imagen/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento",
+								"imagen",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "titulo",
+									"value": "Evento de programa",
+									"type": "text"
+								},
+								{
+									"key": "fecha_ini",
+									"value": "2023-10-30",
+									"type": "text"
+								},
+								{
+									"key": "fecha_fin",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tipo",
+									"value": "Clasificatorio interno",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Evento a toda madre",
+									"type": "text"
+								},
+								{
+									"key": "afiche",
+									"type": "file",
+									"src": "/home/gary/Documentos/Sansi/Forense/Actividad6/Captura de pantalla 2023-10-12 082116.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/evento",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-10-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": 1,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": null,\n    \"pratocinadores\": null,\n    \"contactos\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/evento/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Formularios",
+			"item": [
+				{
+					"name": "Registros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/formularios/registros",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"registros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": 1,\n    \"apellidos\": 1,\n    \"fecha_nacimiento\": 1,\n    \"correo_electronico\": 1,\n    \"numero_celular\": 1,\n    \"carrera\": 0,\n    \"talla_polera\": 0,\n    \"carnet_identidad\": 0,\n    \"codigo_sis_o_institucion\": 0,\n    \"semestre\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/formularios/registro",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": 1,\n    \"apellidos\": 1,\n    \"fecha_nacimiento\": 1,\n    \"correo_electronico\": 1,\n    \"numero_celular\": 1,\n    \"carrera\": 1,\n    \"talla_polera\": 1,\n    \"carnet_identidad\": 1,\n    \"codigo_sis_o_institucion\": 1,\n    \"semestre\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/formularios/registro/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"registro",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/formularios/registro/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"registro",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participantes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/formularios/participantes",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"participantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/formularios/participante/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"participante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"Nathaly\",\n    \"apellidos\": \"Garcia\",\n    \"fecha_nacimiento\": \"2001-10-21\",\n    \"correo_electronico\": \"nathalygarcia@gmail.com\",\n    \"numero_celular\": \"65385951\",\n    \"carrera\": \"Sistemas\",\n    \"talla_polera\": \"M\",\n    \"carnet_identidad\": null,\n    \"codigo_sis_o_institucion\": \"201900403\",\n    \"semestre\": null,\n    \"id_formulario\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/formularios/participante",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"participante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participante",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"gary\",\n    \"apellidos\": \"mamani\",\n    \"fecha_nacimiento\": \"2001-10-22\",\n    \"correo_electronico\": \"garymamani12@gmail.com\",\n    \"numero_celular\": 65385951,\n    \"carrera\": \"Sistemas\",\n    \"talla_polera\": \"M\",\n    \"carnet_identidad\": \"8852589\",\n    \"codigo_sis_o_institucion\": \"201900405\",\n    \"semestre\": 3,\n    \"id_formulario\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/formularios/participante/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"participante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
