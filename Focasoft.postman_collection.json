@@ -34,7 +34,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/evento/1",
+							"raw": "localhost:8000/api/evento/3",
 							"host": [
 								"localhost"
 							],
@@ -42,7 +42,7 @@
 							"path": [
 								"api",
 								"evento",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -159,7 +159,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-10-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": 1,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": null,\n    \"pratocinadores\": null,\n    \"contactos\": null\n}",
+							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-10-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": 1,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": [\n        \"texto1\",\n        \"texto2\",\n        \"texto3\"\n    ],\n    \"pratocinadores\": null,\n    \"contactos\": [\n        \"contacto1\",\n        \"contacto2\",\n        \"contacto3\",\n        \"contacto4\"\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
