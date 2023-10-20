@@ -162,10 +162,11 @@ class EventoController extends Controller
             $evento->afiche = base64_encode(file_get_contents($image->path()));
         }
         $evento->id_formulario = $request->input('id_formulario');
-        $evento->requisitos = $request->input('requisitos');
-        $evento->premios = $request->input('premios');
-        $evento->patrocinadores = $request->input('patrocinadores');
-        $evento->contactos = $request->input('contactos');
+
+        $evento->requisitos = $this->arrayToString($request->input('requisitos'));
+        $evento->premios = $this->arrayToString($request->input('premios'));
+        $evento->patrocinadores = $this->arrayToString($request->input('patrocinadores'));
+        $evento->contactos = $this->arrayToString($request->input('contactos'));
 
         return $evento;
     }
@@ -201,6 +202,12 @@ class EventoController extends Controller
     private function translateEvento($evento)
     {
         $evento = $this->translateTipoEvento($evento);
+
+        $evento->requisitos = $this->stringToArray($evento->requisitos);
+        $evento->premios = $this->stringToArray($evento->premios);
+        $evento->patrocinadores = $this->stringToArray($evento->patrocinadores);
+        $evento->contactos = $this->stringToArray($evento->contactos);
+
         if ($evento->afiche == null)
             return $evento;
 
@@ -286,5 +293,18 @@ class EventoController extends Controller
         }
 
         return $arrayEventos;
+    }
+
+    private function stringToArray($value)
+    {
+        if ($value == null)
+            return null;
+        return preg_split('/,/',$value);
+    }
+    private function arrayToString($value)
+    {
+        if ($value == null)
+            return null;
+        return implode(",",(array)$value);
     }
 }
