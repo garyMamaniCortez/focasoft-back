@@ -16,7 +16,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::latest('fecha_ini')->get();
         foreach ($eventos as $evento)
         {
             $evento = $this->translateEvento($evento);
@@ -115,24 +115,17 @@ class EventoController extends Controller
     public function buscar(Request $request)
     {
         $busqueda = $request->input('busqueda');
-        $titulosEventos = Evento::where('titulo','like',"%{$busqueda}%")->get();
-        $tiposEventos = Evento::where('tipo', 'like', "%{$busqueda}%")->get();
+        $eventos = Evento::where('titulo','like',"%{$busqueda}%")
+                    ->orWhere('tipo', 'like', "%{$busqueda}%")
+                    ->orWhere('descripcion', 'like', "%{$busqueda}%")->latest('fecha_ini')->get();
 
-        $arrayEventos = null;
-        if (count($titulosEventos) == 0 && count($tiposEventos) == 0) {
+        if (count($eventos) == 0)
+        {
             return response()->json([
                 'error' => 'No se encontraron eventos que coincidan con la búsqueda.',
             ], 404);
-        }elseif (count($titulosEventos) == 0) {
-            $arrayEventos = $tiposEventos->toArray();
-        }elseif (count($tiposEventos) == 0) {
-            $arrayEventos = $titulosEventos->toArray();
-        }else {
-            $arrayEventos = array_merge($titulosEventos->toArray(), $tiposEventos->toArray());
-            $arrayEventos = array_unique($arrayEventos);
         }
 
-        $eventos = $this->arrayObjetosToArrayEventos($arrayEventos);
         foreach ($eventos as $evento)
         {
             $evento = $this->translateEvento($evento);
