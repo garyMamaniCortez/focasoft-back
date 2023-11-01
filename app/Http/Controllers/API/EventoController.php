@@ -39,6 +39,10 @@ class EventoController extends Controller
               ], 400);
         }
         $evento = $this->createEvento($request, null);
+        if($evento == null)
+        {
+            return response()->json(['error' => 'El campo afiche debe ser una imagen'], 422);
+        }
         try {
             $evento->save();
         } catch (\Exception $e) {
@@ -151,6 +155,15 @@ class EventoController extends Controller
         if($request->hasfile('afiche'))
         {
             $image = $request->file('afiche');
+
+            if ($image->getMimeType() != 'image/jpeg'
+                && $image->getMimeType() != 'image/png'
+                && $image->getMimeType() != 'image/tiff'
+                && $image->getMimeType() != 'image/bmp')
+            {
+                return null;
+            }
+
             $evento->afiche = base64_encode(file_get_contents($image->path()));
         }
         $evento->id_formulario = $request->input('id_formulario');
