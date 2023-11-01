@@ -116,6 +116,20 @@ class EventoController extends Controller
         //
     }
 
+    public function agregarFormulario(Request $request)
+    {
+        $idEvento = $request->input('id_evento');
+        $evento = Evento::findOrFail($idEvento);
+        $evento->id_formulario = $request->input('id_formulario');
+        try {
+            $evento->save();
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        return response()->json($evento, 200);
+    }
+
     public function buscar(Request $request)
     {
         $busqueda = $request->input('busqueda');
