@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Participante;
 use App\Models\FormularioRegistro;
+use DateTime;
 
 class ParticipanteController extends Controller
 {
@@ -36,6 +37,12 @@ class ParticipanteController extends Controller
               ], 400);
         }
         $participante = $this->createParticipante($request, null);
+
+        if($participante == null)
+        {
+            return response()->json(['error' => 'La fecha no puede ser posterior a la actual'], 422);
+        }
+
         try {
             $participante->save();
         } catch (\Exception $e) {
@@ -109,6 +116,11 @@ class ParticipanteController extends Controller
         $participante->codigo_sis_o_institucion = $request->input('codigo_sis_o_institucion');
         $participante->semestre = $request->input('semestre');
         $participante->id_formulario = $request->input('id_formulario');
+
+        if (new DateTime() < new DateTime($participante->fecha_nacimiento))
+        {
+            return null;
+        }
 
         return $participante;
     }
