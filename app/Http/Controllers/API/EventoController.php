@@ -140,7 +140,6 @@ class EventoController extends Controller
         if ($id != null)
         {
             $evento = Evento::findOrFail($id);
-            $tipo = $evento->tipo;
         }
         $evento->titulo = $request->input('titulo');
         $evento->fecha_ini = $request->input('fecha_ini');
