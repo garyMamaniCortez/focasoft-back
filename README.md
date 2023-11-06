@@ -87,3 +87,7 @@ php artisan serve
 php artisan make:model Sitio
 php artisan make:controller API/SitioController --api
 ```
+## To export the sql script
+```
+mysqldump -u root -p focasoft > script.sql
+```
