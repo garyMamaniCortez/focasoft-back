@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EventoController;
 use App\Http\Controllers\API\FormularioRegistroController;
 use App\Http\Controllers\API\ParticipanteController;
+use App\Http\Controllers\API\PatrocinadorController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
 
@@ -45,3 +46,7 @@ Route::get('/formularios/participantes',[ParticipanteController::class, 'index']
 Route::get('/formularios/participante/{id}',[ParticipanteController::class, 'show']);
 Route::post('/formularios/participante',[ParticipanteController::class, 'store']);
 Route::put('/formularios/participante/{id}',[ParticipanteController::class, 'update']);
+
+Route::get('/patrocinadores',[PatrocinadorController::class, 'index']);
+Route::get('/patrocinador/{id}',[PatrocinadorController::class, 'show']);
+Route::post('/patrocinador',[PatrocinadorController::class, 'store']);
