@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\FormularioRegistro;
+use App\Models\Pregunta;
+use App\Http\Controllers\API\PreguntaController;
+use App\Http\Controllers\API\EventoController;
 
 class FormularioRegistroController extends Controller
 {
@@ -28,13 +31,6 @@ class FormularioRegistroController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$this->isValidForm($request))
-        {
-            return response()->json([
-                "error" => "Debe llenar los campos obligatorios"
-              ], 400);
-        }
-
         $formulario_registro = $this->createFormulario($request, null);
 
         try {
@@ -42,6 +38,13 @@ class FormularioRegistroController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+        $formularioRequest = new Request([
+            'id_formulario' => $formulario_registro->id,
+            'id_evento' => $request->input('id_evento')
+        ]);
+        $eventoController = new EventoController();
+        $eventoController->agregarFormulario($formularioRequest);
+
         return response()->json($formulario_registro,201);
     }
 
@@ -53,8 +56,14 @@ class FormularioRegistroController extends Controller
      */
     public function show($id)
     {
-        $formulario_registro = FormularioRegistro::find($id);
-        return response()->json($formulario_registro);
+        return response()->json($this->formulario($id));
+    }
+
+    public function formulario($id)
+    {
+        $formularioRegistro = FormularioRegistro::find($id);
+        $preguntas = $formularioRegistro->preguntas;
+        return $this->mostrarFormulario($preguntas);
     }
 
     /**
@@ -66,13 +75,6 @@ class FormularioRegistroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(!$this->isValidForm($request))
-        {
-            return response()->json([
-                "error" => "Debe llenar los campos obligatorios"
-              ], 400);
-        }
-
         $formulario_registro = $this->createFormulario($request, $id);
 
         try {
@@ -80,6 +82,12 @@ class FormularioRegistroController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+        $formularioRequest = new Request([
+            'id_formulario' => $formulario_registro->id,
+            'id_evento' => $request->input('id_evento')
+        ]);
+        $eventoController = new EventoController();
+        $eventoController->agregarFormulario($formularioRequest);
         return response()->json($formulario_registro,200);
     }
 
@@ -94,25 +102,74 @@ class FormularioRegistroController extends Controller
         //
     }
 
+    private function mostrarFormulario($preguntas)
+    {
+        $Pregunta = new Pregunta;
+        $arrayPreguntas = $this->stringToArray($preguntas);
+        $formulario = array();
+        foreach ($arrayPreguntas as $pregunta) {
+            array_push($formulario, Pregunta::where('id',$pregunta)->first());
+        }
+        return $formulario;
+    }
+
+    private function guardarPreguntas($preguntas)
+    {
+        foreach ($preguntas as $pregunta) {
+            $request = new Request([
+                'texto_pregunta' => $pregunta,
+                'tipo' => 'texto',
+                'obligatorio' => false,
+                'opciones' => null
+            ]);
+            $preguntaController = new PreguntaController();
+            $preguntaController->store($request);
+        }
+    }
+
     private function createFormulario(Request $request, $id)
     {
-        $formulario_registro = new FormularioRegistro;
+        $formularioRegistro = new FormularioRegistro;
         if ($id != null)
         {
-            $formulario_registro = FormularioRegistro::findOrFail($id);
+            $formularioRegistro = FormularioRegistro::findOrFail($id);
         }
-        $formulario_registro->nombres = $request->input('nombres');
-        $formulario_registro->apellidos = $request->input('apellidos');
-        $formulario_registro->fecha_nacimiento = $request->input('fecha_nacimiento');
-        $formulario_registro->correo_electronico = $request->input('correo_electronico');
-        $formulario_registro->numero_celular = $request->input('numero_celular');
-        $formulario_registro->carrera = $request->input('carrera');
-        $formulario_registro->talla_polera = $request->input('talla_polera');
-        $formulario_registro->carnet_identidad = $request->input('carnet_identidad');
-        $formulario_registro->codigo_sis_o_institucion = $request->input('codigo_sis_o_institucion');
-        $formulario_registro->semestre = $request->input('semestre');
+        $formularioRegistro->id_evento = $request->input('id_evento');
+        if($request->input('preguntas') != null)
+        {
+            $this->guardarPreguntas($request->input('preguntas'));
+            $preguntas = $this->obtenerIdPreguntas($request->input('preguntas'));
+            $formularioRegistro->preguntas = $preguntas;
+            return $formularioRegistro;
+        }
 
-        return $formulario_registro;
+        return "preguntas";
+    }
+
+    private function obtenerIdPreguntas($preguntas)
+    {
+        $arrayPreguntas = array();
+        foreach ($preguntas as $pregunta) {
+            $idPregunta = Pregunta::select('id')
+                                    ->where('texto_pregunta', $pregunta)
+                                    ->first();
+            array_push($arrayPreguntas, $idPregunta->id);
+        }
+        return $this->arrayToString($arrayPreguntas);
+    }
+
+    private function arrayToString($value)
+    {
+        if ($value == null)
+            return null;
+        return implode(",",(array)$value);
+    }
+
+    private function stringToArray($value)
+    {
+        if ($value == null)
+            return null;
+        return preg_split('/,/',$value);
     }
 
     private function isValidForm(Request $request)

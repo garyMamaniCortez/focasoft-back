@@ -283,6 +283,8 @@ CREATE TABLE `respuesta` (
   `id_participante` int NOT NULL,
   `id_formulario` int NOT NULL,
   `datos_respuesta` text,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `respuesta_ibfk_1` (`id_participante`),
   KEY `respuesta_ibfk_2` (`id_formulario`),
