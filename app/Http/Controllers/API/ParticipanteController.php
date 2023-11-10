@@ -40,6 +40,9 @@ class ParticipanteController extends Controller
         if($guardado === 'incompleto')
             return response()->json(['error' => 'no se encuentran todas las preguntas del formulario'],400);
 
+        if($guardado === 'formato')
+            return response()->json(['error' => 'el formato de las respuestas es incorrecto'],400);
+
         return response()->json($guardado,200);
     }
 
@@ -104,6 +107,8 @@ class ParticipanteController extends Controller
         if(!$this->verificarFormulario($respuestas, $formulario))
             return 'incompleto';
 
+        if(!$this->esFormatoValido($formulario, $respuestas))
+            return 'formato';
         $arrayRespuestas = array();
         foreach ($formulario as $pregunta) {
             $resultado = null;
@@ -148,10 +153,10 @@ class ParticipanteController extends Controller
             if(!$cumple)
                 $cumpleTodos = false;
         }
-        return $cumple;
+        return $cumpleTodos;
     }
 
-    private function limpiarDatos($respuestas, $idPreguntas)//preguntas es array, respuestas es objeto
+    private function limpiarDatos($respuestas, $idPreguntas)
     {
         $preguntas = $this->getPreguntas($idPreguntas);
         array_push($preguntas, 'id');
@@ -175,26 +180,44 @@ class ParticipanteController extends Controller
         return $preguntas;
     }
 
-    private function isValidForm(Request $request)
+    private function esFormatoValido($preguntas, $respuestas)
     {
-        $formulario = FormularioRegistro::find($request->input('id_formulario'))->toArray();
-        $validator = Validator::make($request->all(), [
-            'nombres' => ($formulario['nombres'] == 1) ? 'required' : '',
-            'apellidos' => ($formulario['apellidos'] == 1) ? 'required' : '',
-            'fecha_nacimiento' => ($formulario['fecha_nacimiento'] == 1) ? 'required' : '',
-            'correo_electronico' => ($formulario['correo_electronico'] == 1) ? 'required|email' : '',
-            'numero_celular' => ($formulario['numero_celular'] == 1) ? 'required|numeric' : '',
-            'carrera' => ($formulario['carrera'] == 1) ? 'required' : '',
-            'talla_polera' => ($formulario['talla_polera'] == 1) ? 'required' : '',
-            'carnet_identidad' => ($formulario['carnet_identidad'] == 1) ? 'required' : '',
-            'codigo_sis_o_institucion' => ($formulario['codigo_sis_o_institucion'] == 1) ? 'required' : '',
-            'semestre' => ($formulario['semestre'] == 1) ? 'required' : '',
-            'id_formulario' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return false;
+        $cumpleTodos = true;
+        foreach ($preguntas as $pregunta) {
+            $cumple = false;
+            foreach ($respuestas as $respuesta) {
+                if($pregunta->texto_pregunta === $respuesta['pregunta'])
+                    if($this->formatoValido($pregunta, $respuesta['respuesta']))
+                        $cumple = true;
+            }
+            if(!$cumple)
+                $cumpleTodos = false;
         }
-        return true;
+        return $cumpleTodos;
+    }
+    private function formatoValido($pregunta, $respuesta)
+    {
+        $cumple = false;
+        switch ($pregunta->tipo) {
+            case 'nombre':
+                $cumple = ctype_alpha($respuesta);
+                break;
+            case 'texto':
+                $cumple = ctype_alnum($respuesta);
+                break;
+            case 'telefono':
+                $cumple = ctype_digit($respuesta);
+                break;
+            case 'fecha_AFA':
+                $cumple = strtotime($respuesta);
+                break;
+            case 'email':
+                $cumple = filter_var($respuesta, FILTER_VALIDATE_EMAIL);
+                break;
+            default:
+                $cumple = false;
+                break;
+        }
+        return $cumple;
     }
 }
