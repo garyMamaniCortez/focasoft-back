@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormularioRegistro extends Model
+class PatrocinadorEvento extends Model
 {
-    protected $table = 'formulario';
+    protected $table = 'patrocinador_evento';
     protected $fillable = [
         'id_evento',
-        'preguntas'
+        'id_patrocinador'
     ];
     protected $hidden = [
         'created_at',

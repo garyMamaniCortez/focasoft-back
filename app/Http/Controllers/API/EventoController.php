@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Models\Evento;
+use App\Models\Patrocinador;
+use App\Models\PatrocinadorEvento;
+use App\Http\Controllers\API\PatrocinadorController;
+use DateTime;
 
 class EventoController extends Controller
 {
@@ -39,15 +43,20 @@ class EventoController extends Controller
               ], 400);
         }
         $evento = $this->createEvento($request, null);
-        if($evento == null)
+        if($evento == 'afiche')
         {
             return response()->json(['error' => 'El campo afiche debe ser una imagen'], 422);
+        }
+        if($evento == 'fecha')
+        {
+            return response()->json(['error' => 'La fecha de inicio no puede ser anterior a la fecha actual']);
         }
         try {
             $evento->save();
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+        $this->guardarEventoPatrocinador($evento->id, $request->input('patrocinadores'));
         return response()->json($evento,201);
     }
 
@@ -60,6 +69,12 @@ class EventoController extends Controller
     public function show($id)
     {
         $evento = Evento::find($id);
+        if ($evento == null)
+        {
+            return response()->json([
+                'error' => 'No se encontraron eventos con ese ID.',
+            ], 404);
+        }
         $evento = $this->translateEvento($evento);
         return response()->json($evento);
     }
@@ -95,13 +110,21 @@ class EventoController extends Controller
               ], 400);
         }
         $evento = $this->createEvento($request, $id);
+        if($evento == 'afiche')
+        {
+            return response()->json(['error' => 'El campo afiche debe ser una imagen'], 422);
+        }
+        if($evento == 'fecha')
+        {
+            return response()->json(['error' => 'La fecha de inicio no puede ser anterior a la fecha actual']);
+        }
 
         try {
             $evento->save();
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
+        $this->guardarEventoPatrocinador($evento->id, $request->input('patrocinadores'));
         return response()->json($evento, 200);
     }
 
@@ -161,6 +184,10 @@ class EventoController extends Controller
         }
         $evento->titulo = $request->input('titulo');
         $evento->fecha_ini = $request->input('fecha_ini');
+        if (new DateTime() > new DateTime($evento->fecha_ini))
+        {
+            return 'fecha';
+        }
         $evento->fecha_fin = $request->input('fecha_fin');
         $evento->tipo = $tipo;
         $evento->descripcion = $request->input('descripcion');
@@ -175,7 +202,7 @@ class EventoController extends Controller
                 && $image->getMimeType() != 'image/tiff'
                 && $image->getMimeType() != 'image/bmp')
             {
-                return null;
+                return 'afiche';
             }
 
             $evento->afiche = base64_encode(file_get_contents($image->path()));
@@ -184,8 +211,13 @@ class EventoController extends Controller
 
         $evento->requisitos = $this->arrayToString($request->input('requisitos'));
         $evento->premios = $this->arrayToString($request->input('premios'));
-        $evento->patrocinadores = $this->arrayToString($request->input('patrocinadores'));
         $evento->contactos = $this->arrayToString($request->input('contactos'));
+
+        $patrocinadores = $request->input('patrocinadores');
+        if($patrocinadores != null)
+        {
+            $this->guardarPatrocinadores($patrocinadores);
+        }
 
         return $evento;
     }
@@ -224,7 +256,7 @@ class EventoController extends Controller
 
         $evento->requisitos = $this->stringToArray($evento->requisitos);
         $evento->premios = $this->stringToArray($evento->premios);
-        $evento->patrocinadores = $this->stringToArray($evento->patrocinadores);
+        $evento->patrocinadores = $this->obtenerPatrocinadores($evento->id);
         $evento->contactos = $this->stringToArray($evento->contactos);
 
         if ($evento->afiche == null)
@@ -288,32 +320,6 @@ class EventoController extends Controller
         return "localhost:8000/api/evento/imagen/{$id}";
     }
 
-    private function arrayObjetosToArrayEventos(array $arrayObjetos)
-    {
-        $arrayEventos = [];
-
-        foreach ($arrayObjetos as $objeto) {
-            $evento = new Evento();
-
-            $evento->id = $objeto['id'];
-            $evento->titulo = $objeto['titulo'];
-            $evento->fecha_ini = $objeto['fecha_ini'];
-            $evento->tipo = $objeto['tipo'];
-            $evento->descripcion = $objeto['descripcion'];
-            $evento->afiche = $objeto['afiche'];
-            $evento->id_formulario = $objeto['id_formulario'];
-            $evento->fecha_fin = $objeto['fecha_fin'];
-            $evento->requisitos = $objeto['requisitos'];
-            $evento->premios = $objeto['premios'];
-            $evento->patrocinadores = $objeto['patrocinadores'];
-            $evento->contactos = $objeto['contactos'];
-
-            $arrayEventos[] = $evento;
-        }
-
-        return $arrayEventos;
-    }
-
     private function stringToArray($value)
     {
         if ($value == null)
@@ -325,5 +331,49 @@ class EventoController extends Controller
         if ($value == null)
             return null;
         return implode(",",(array)$value);
+    }
+    private function guardarPatrocinadores($patrocinadores)
+    {
+        foreach ($patrocinadores as $patrocinador) {
+            $request = new Request([
+                'nombre' => $patrocinador
+            ]);
+            $patrocinadorController = new PatrocinadorController();
+            $patrocinadorController->store($request);
+        }
+    }
+    private function obtenerPatrocinadores($id)
+    {
+        $patrocinadorController = new PatrocinadorController();
+        $patrocinadoresEvento = PatrocinadorEvento::where('id_evento', $id)->get();
+        if(count($patrocinadoresEvento) != 0)
+        {
+            $patrocinadoresEventos = array();
+            foreach ($patrocinadoresEvento as $patrocinadorEvento) {
+                $patrocinador = $patrocinadorController->patrocinador($patrocinadorEvento->id_patrocinador);
+                array_push($patrocinadoresEventos, $patrocinador->nombre);
+            }
+            return $patrocinadoresEventos;
+        }
+        return null;
+    }
+    private function guardarEventoPatrocinador($idEvento, $patrocinadores)
+    {
+        if($patrocinadores != null)
+            foreach ($patrocinadores as $patrocinador) {
+                $idPatrocinador = Patrocinador::select('id')
+                                ->where('nombre','like',"%{$patrocinador}%")
+                                ->first();
+                $existe = PatrocinadorEvento::where('id_patrocinador', $idPatrocinador->id)
+                                            ->where('id_evento', $idEvento)
+                                            ->get();
+                if(count($existe) == 0)
+                {
+                    $patrocinadorEvento = new PatrocinadorEvento;
+                    $patrocinadorEvento->id_patrocinador = $idPatrocinador->id;
+                    $patrocinadorEvento->id_evento = $idEvento;
+                    $patrocinadorEvento->save();
+                }
+            }
     }
 }

@@ -18,7 +18,6 @@ class Evento extends Model
         'id_formulario',
         'requisitos',
         'premios',
-        'pratocinadores',
         'contactos'
     ];
     protected $hidden = [

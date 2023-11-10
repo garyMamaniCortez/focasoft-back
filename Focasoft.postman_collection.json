@@ -10,6 +10,78 @@
 			"name": "Evento",
 			"item": [
 				{
+					"name": "Patrocinador",
+					"item": [
+						{
+							"name": "Patrocinador",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/patrocinador/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"patrocinador",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Patrocinador",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Nice\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/patrocinador",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"patrocinador"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Patrocinadores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/patrocinadores",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"patrocinadores"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Eventos",
 					"request": {
 						"method": "GET",
@@ -34,7 +106,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/evento/3",
+							"raw": "localhost:8000/api/evento/1",
 							"host": [
 								"localhost"
 							],
@@ -42,7 +114,7 @@
 							"path": [
 								"api",
 								"evento",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -55,7 +127,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"busqueda\": \"competencia\"\n}",
+							"raw": "{\n    \"busqueda\": \"evento\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,7 +153,13 @@
 					"name": "Evento Imagen",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "image/jpeg",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8000/api/evento/imagen/1",
 							"host": [
@@ -108,12 +186,12 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "Evento de programa",
+									"value": "Clasificatorio interno San Simon",
 									"type": "text"
 								},
 								{
 									"key": "fecha_ini",
-									"value": "2023-10-30",
+									"value": "2023-11-29",
 									"type": "text"
 								},
 								{
@@ -134,7 +212,7 @@
 								{
 									"key": "afiche",
 									"type": "file",
-									"src": "/home/gary/Documentos/Sansi/Forense/Actividad6/Captura de pantalla 2023-10-12 082116.png"
+									"src": "/home/gary/Imágenes/Capturas de pantalla/Captura desde 2023-11-01 06-48-25.png"
 								}
 							]
 						},
@@ -153,13 +231,13 @@
 					"response": []
 				},
 				{
-					"name": "Evento",
+					"name": "agregar Formulario",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-10-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": 1,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": [\n        \"texto1\",\n        \"texto2\",\n        \"texto3\"\n    ],\n    \"pratocinadores\": null,\n    \"contactos\": [\n        \"contacto1\",\n        \"contacto2\",\n        \"contacto3\",\n        \"contacto4\"\n    ]\n}",
+							"raw": "{\n    \"id_formulario\": 2,\n    \"id_evento\": 5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -167,7 +245,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/evento/3",
+							"raw": "localhost:8000/api/evento/agregarFormulario",
 							"host": [
 								"localhost"
 							],
@@ -175,7 +253,36 @@
 							"path": [
 								"api",
 								"evento",
-								"3"
+								"agregarFormulario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-11-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": null,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": [\n        \"texto1\",\n        \"texto2\",\n        \"texto3\"\n    ],\n    \"patrocinadores\": [\n        \"Unosquare\",\n        \"Nice\",\n        \"JalaSoft\",\n        \"Encora\",\n        \"AssureSoft\"\n    ],\n    \"contactos\": [\n        \"contacto1\",\n        \"contacto2\",\n        \"contacto3\",\n        \"contacto4\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/evento/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"evento",
+								"1"
 							]
 						}
 					},
@@ -186,6 +293,60 @@
 		{
 			"name": "Formularios",
 			"item": [
+				{
+					"name": "Pregunta",
+					"item": [
+						{
+							"name": "Preguntas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/formulario/preguntas",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"formulario",
+										"preguntas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pregunta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"texto_pregunta\": \"Numero Celular\",\n    \"tipo\": \"telefono\",\n    \"obligatorio\": true,\n    \"opciones\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/formulario/pregunta",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"formulario",
+										"pregunta"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Registros",
 					"request": {
@@ -213,7 +374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombres\": 1,\n    \"apellidos\": 1,\n    \"fecha_nacimiento\": 1,\n    \"correo_electronico\": 1,\n    \"numero_celular\": 1,\n    \"carrera\": 0,\n    \"talla_polera\": 0,\n    \"carnet_identidad\": 0,\n    \"codigo_sis_o_institucion\": 0,\n    \"semestre\": 0\n}",
+							"raw": "{\n    \"id_evento\": 1,\n    \"preguntas\": [\n        \"Nombres\",\n        \"Apellidos\",\n        \"Fecha de Nacimiento\",\n        \"Codigo SIS\"\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -242,7 +403,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombres\": 1,\n    \"apellidos\": 1,\n    \"fecha_nacimiento\": 1,\n    \"correo_electronico\": 1,\n    \"numero_celular\": 1,\n    \"carrera\": 1,\n    \"talla_polera\": 1,\n    \"carnet_identidad\": 1,\n    \"codigo_sis_o_institucion\": 1,\n    \"semestre\": 1\n}",
+							"raw": "{\n    \"id_evento\": 1,\n    \"preguntas\": [\n        \"Nombres\",\n        \"Apellidos\",\n        \"Fecha de Nacimiento\",\n        \"Codigo SIS\",\n        \"Talla Polera\"\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -250,7 +411,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/6",
+							"raw": "localhost:8000/api/formularios/registro/1",
 							"host": [
 								"localhost"
 							],
@@ -259,7 +420,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"6"
+								"1"
 							]
 						}
 					},
@@ -271,7 +432,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/2",
+							"raw": "localhost:8000/api/formularios/registro/1",
 							"host": [
 								"localhost"
 							],
@@ -280,7 +441,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -289,8 +450,17 @@
 				{
 					"name": "Participantes",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_evento\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8000/api/formularios/participantes",
 							"host": [
@@ -334,7 +504,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombres\": \"Nathaly\",\n    \"apellidos\": \"Garcia\",\n    \"fecha_nacimiento\": \"2001-10-21\",\n    \"correo_electronico\": \"nathalygarcia@gmail.com\",\n    \"numero_celular\": \"65385951\",\n    \"carrera\": \"Sistemas\",\n    \"talla_polera\": \"M\",\n    \"carnet_identidad\": null,\n    \"codigo_sis_o_institucion\": \"201900403\",\n    \"semestre\": null,\n    \"id_formulario\": 2\n}",
+							"raw": "{\n    \"id_formulario\" : 1,\n    \"respuestas\":[\n        {\n            \"pregunta\": \"Nombres\",\n            \"respuesta\": \"Luis\"\n        },\n        {\n            \"pregunta\": \"Apellidos\",\n            \"respuesta\": \"Rosales\"\n        },\n        {\n            \"pregunta\": \"Fecha de Nacimiento\",\n            \"respuesta\": \"03-11-2000\"\n        },\n        {\n            \"pregunta\": \"Codigo SIS\",\n            \"respuesta\": \"20195202\"\n        },\n        {\n            \"pregunta\": \"Talla Polera\",\n            \"respuesta\": \"M\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -428,7 +598,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer 1|YvcVZZATKkBV0bEXsFL7SLFqmVZcM77c4K0t73rA",
+								"value": "Bearer 2|T8QS0Qi3vWTF0QB6P16VNriA3GijGlmUWi8kkZ0O",
 								"type": "text"
 							}
 						],
