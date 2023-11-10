@@ -39,7 +39,7 @@ CREATE TABLE `evento` (
   PRIMARY KEY (`id`),
   KEY `evento_ibfk_1` (`id_formulario`),
   CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_formulario`) REFERENCES `formulario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +48,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
+INSERT INTO `evento` VALUES (1,'Evento a toda leche de programacion','2023-11-30','taller_de_entrenamiento','Evento que te hara poner los pelos de punta',NULL,1,'2023-11-09 19:13:49','2023-11-08 16:44:25',NULL,'Ser la ostia','texto1,texto2,texto3','contacto1,contacto2,contacto3,contacto4');
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +97,7 @@ CREATE TABLE `formulario` (
   PRIMARY KEY (`id`),
   KEY `formulario_ibfk_1` (`id_evento`),
   CONSTRAINT `formulario_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +106,7 @@ CREATE TABLE `formulario` (
 
 LOCK TABLES `formulario` WRITE;
 /*!40000 ALTER TABLE `formulario` DISABLE KEYS */;
+INSERT INTO `formulario` VALUES (1,1,'1,2,3,6,7','2023-11-09 02:45:28','2023-11-09 01:34:04');
 /*!40000 ALTER TABLE `formulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +122,7 @@ CREATE TABLE `participante` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,6 +131,7 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
+INSERT INTO `participante` VALUES (1,'2023-11-09 22:29:57','2023-11-09 22:29:57'),(2,'2023-11-09 22:31:50','2023-11-09 22:31:50'),(3,'2023-11-09 22:32:41','2023-11-09 22:32:41'),(4,'2023-11-09 22:35:01','2023-11-09 22:35:01'),(5,'2023-11-09 22:39:02','2023-11-09 22:39:02'),(6,'2023-11-09 22:42:57','2023-11-09 22:42:57'),(7,'2023-11-09 22:44:19','2023-11-09 22:44:19'),(8,'2023-11-09 22:46:02','2023-11-09 22:46:02'),(9,'2023-11-09 22:47:34','2023-11-09 22:47:34'),(10,'2023-11-09 22:48:30','2023-11-09 22:48:30'),(11,'2023-11-09 22:50:22','2023-11-09 22:50:22'),(12,'2023-11-09 22:53:24','2023-11-09 22:53:24'),(13,'2023-11-09 22:55:30','2023-11-09 22:55:30'),(14,'2023-11-09 22:56:37','2023-11-09 22:56:37'),(15,'2023-11-09 22:58:25','2023-11-09 22:58:25'),(16,'2023-11-09 22:59:05','2023-11-09 22:59:05'),(17,'2023-11-09 22:59:26','2023-11-09 22:59:26'),(18,'2023-11-09 22:59:48','2023-11-09 22:59:48'),(19,'2023-11-09 23:00:19','2023-11-09 23:00:19'),(20,'2023-11-09 23:01:31','2023-11-09 23:01:31'),(21,'2023-11-09 23:07:20','2023-11-09 23:07:20'),(22,'2023-11-09 23:07:50','2023-11-09 23:07:50'),(23,'2023-11-09 23:09:45','2023-11-09 23:09:45'),(24,'2023-11-09 23:10:36','2023-11-09 23:10:36'),(25,'2023-11-09 23:10:59','2023-11-09 23:10:59'),(26,'2023-11-09 23:14:15','2023-11-09 23:14:15'),(27,'2023-11-09 23:18:14','2023-11-09 23:18:14'),(28,'2023-11-10 01:03:40','2023-11-10 01:03:40'),(29,'2023-11-10 22:14:36','2023-11-10 22:14:36'),(30,'2023-11-10 22:43:27','2023-11-10 22:43:27'),(31,'2023-11-10 22:46:35','2023-11-10 22:46:35'),(32,'2023-11-10 22:49:39','2023-11-10 22:49:39'),(33,'2023-11-10 22:52:13','2023-11-10 22:52:13'),(34,'2023-11-10 22:53:06','2023-11-10 22:53:06'),(35,'2023-11-10 22:53:52','2023-11-10 22:53:52'),(36,'2023-11-10 22:54:45','2023-11-10 22:54:45'),(37,'2023-11-10 22:55:13','2023-11-10 22:55:13'),(38,'2023-11-10 22:55:36','2023-11-10 22:55:36'),(39,'2023-11-10 22:55:58','2023-11-10 22:55:58'),(40,'2023-11-10 22:56:46','2023-11-10 22:56:46'),(41,'2023-11-10 22:57:02','2023-11-10 22:57:02'),(42,'2023-11-10 22:57:31','2023-11-10 22:57:31');
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +172,7 @@ CREATE TABLE `patrocinador` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +181,7 @@ CREATE TABLE `patrocinador` (
 
 LOCK TABLES `patrocinador` WRITE;
 /*!40000 ALTER TABLE `patrocinador` DISABLE KEYS */;
+INSERT INTO `patrocinador` VALUES (1,'Unosquare','2023-11-08 16:44:46','2023-11-08 16:44:46'),(2,'Nice','2023-11-08 16:44:46','2023-11-08 16:44:46'),(3,'JalaSoft','2023-11-08 16:44:46','2023-11-08 16:44:46'),(4,'Encora','2023-11-08 16:44:46','2023-11-08 16:44:46'),(5,'AssureSoft','2023-11-08 16:44:47','2023-11-08 16:44:47');
 /*!40000 ALTER TABLE `patrocinador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +203,7 @@ CREATE TABLE `patrocinador_evento` (
   KEY `patrocinador_evento_ibfk_2` (`id_patrocinador`),
   CONSTRAINT `patrocinador_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id`),
   CONSTRAINT `patrocinador_evento_ibfk_2` FOREIGN KEY (`id_patrocinador`) REFERENCES `patrocinador` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,6 +212,7 @@ CREATE TABLE `patrocinador_evento` (
 
 LOCK TABLES `patrocinador_evento` WRITE;
 /*!40000 ALTER TABLE `patrocinador_evento` DISABLE KEYS */;
+INSERT INTO `patrocinador_evento` VALUES (1,1,1,'2023-11-08 16:44:47','2023-11-08 16:44:47'),(2,1,2,'2023-11-08 16:44:47','2023-11-08 16:44:47'),(3,1,3,'2023-11-08 16:44:47','2023-11-08 16:44:47'),(4,1,4,'2023-11-08 16:44:48','2023-11-08 16:44:48'),(5,1,5,'2023-11-08 16:44:48','2023-11-08 16:44:48');
 /*!40000 ALTER TABLE `patrocinador_evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +264,7 @@ CREATE TABLE `pregunta` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +273,7 @@ CREATE TABLE `pregunta` (
 
 LOCK TABLES `pregunta` WRITE;
 /*!40000 ALTER TABLE `pregunta` DISABLE KEYS */;
+INSERT INTO `pregunta` VALUES (1,'Nombres','nombre',1,NULL,'2023-11-08 21:43:15','2023-11-08 21:43:15'),(2,'Apellidos','nombre',1,NULL,'2023-11-08 21:43:54','2023-11-08 21:43:54'),(3,'Fecha de Nacimiento','fecha_AFA',1,NULL,'2023-11-08 21:46:58','2023-11-08 21:46:58'),(4,'Correo Electronico','email',1,NULL,'2023-11-08 21:47:55','2023-11-08 21:47:55'),(5,'Numero Celular','telefono',1,NULL,'2023-11-08 21:48:50','2023-11-08 21:48:50'),(6,'Codigo SIS','texto',0,NULL,'2023-11-09 01:53:30','2023-11-09 01:53:30'),(7,'Talla Polera','texto',0,NULL,'2023-11-09 02:45:28','2023-11-09 02:45:28');
 /*!40000 ALTER TABLE `pregunta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +296,7 @@ CREATE TABLE `respuesta` (
   KEY `respuesta_ibfk_2` (`id_formulario`),
   CONSTRAINT `respuesta_ibfk_1` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id`),
   CONSTRAINT `respuesta_ibfk_2` FOREIGN KEY (`id_formulario`) REFERENCES `formulario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,6 +305,7 @@ CREATE TABLE `respuesta` (
 
 LOCK TABLES `respuesta` WRITE;
 /*!40000 ALTER TABLE `respuesta` DISABLE KEYS */;
+INSERT INTO `respuesta` VALUES (1,27,1,'Gary,Mamani,22-10-2001,20194002,M','2023-11-09 23:18:14','2023-11-09 23:18:14'),(2,28,1,'Luis,Rosales,03-11-2000,20195202,M','2023-11-10 01:03:40','2023-11-10 01:03:40'),(3,30,1,'Nath1,Garcia,2000-10-10,20194292,S','2023-11-10 22:43:27','2023-11-10 22:43:27'),(4,31,1,'Nath1,Garcia,2000-10-10,20194292,S','2023-11-10 22:46:35','2023-11-10 22:46:35'),(5,32,1,'Nath1,Garcia,2000-10-10,20194292,S','2023-11-10 22:49:39','2023-11-10 22:49:39'),(6,33,1,'Nath1,Garcia,2000-10-10,20194292,S','2023-11-10 22:52:13','2023-11-10 22:52:13'),(7,34,1,'Nath1,Garcia,2000-10-10,20194292,S','2023-11-10 22:53:06','2023-11-10 22:53:06'),(8,38,1,'Nath,Garcia,2000-10-10,20194292,S','2023-11-10 22:55:37','2023-11-10 22:55:37'),(9,41,1,'Nath,Garcia,2000-10-10,20194292,S','2023-11-10 22:57:03','2023-11-10 22:57:03');
 /*!40000 ALTER TABLE `respuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-07 18:56:39
+-- Dump completed on 2023-11-10 18:58:51
