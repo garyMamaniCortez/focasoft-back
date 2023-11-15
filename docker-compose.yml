@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: focasoft
+    command: ["mysql", "-u root", "-p root", "focasoft", "-e", "source /script.sql"]
+
+  laravel:
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 8001:8000
+    volumes:
+      - ./:/var/www/html
+    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
