@@ -5,12 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pregunta;
+use App\Models\Evento;
 
 class PreguntaController extends Controller
 {
-    public function index()
+    public function index($idEvento)
     {
-        $preguntas = $this->preguntas();
+        $preguntas = $this->preguntasParaEvento($idEvento);
         return response()->json($preguntas);
     }
 
@@ -44,6 +45,11 @@ class PreguntaController extends Controller
             $pregunta->tipo = $request->input('tipo');
             $pregunta->obligatorio = $request->input('obligatorio');
             $pregunta->opciones = $request->input('opciones');
+
+            $pregunta->equipo = false;
+            if($request->input('equipo') != null)
+                $pregunta->equipo = $request->input('equipo');
+
             return $pregunta;
         }
         return 'texto_pregunta';
@@ -61,5 +67,11 @@ class PreguntaController extends Controller
             }
         }
         return $response;
+    }
+
+    private function preguntasParaEvento($idEvento)
+    {
+        $evento = Evento::find($idEvento);
+        return Pregunta::where('equipo', $evento->equipo)->get();
     }
 }

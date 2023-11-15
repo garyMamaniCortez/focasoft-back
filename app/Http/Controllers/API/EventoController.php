@@ -213,6 +213,10 @@ class EventoController extends Controller
         $evento->premios = $this->arrayToString($request->input('premios'));
         $evento->contactos = $this->arrayToString($request->input('contactos'));
 
+        $evento->equipo = false;
+        if($request->input('equipo') === 'true')
+            $evento->equipo = true;
+
         $patrocinadores = $request->input('patrocinadores');
         if($patrocinadores != null)
         {
