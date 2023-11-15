@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\FormularioRegistro;
 use App\Models\Pregunta;
+use App\Models\Evento;
 use App\Http\Controllers\API\PreguntaController;
 use App\Http\Controllers\API\EventoController;
 
@@ -113,12 +114,14 @@ class FormularioRegistroController extends Controller
         return $formulario;
     }
 
-    private function guardarPreguntas($preguntas)
+    private function guardarPreguntas($preguntas, $idEvento)
     {
+        $evento = Evento::find($idEvento);
         foreach ($preguntas as $pregunta) {
             $request = new Request([
                 'texto_pregunta' => $pregunta,
                 'tipo' => 'texto',
+                'equipo' => $evento->equipo,
                 'obligatorio' => false,
                 'opciones' => null
             ]);
@@ -137,7 +140,7 @@ class FormularioRegistroController extends Controller
         $formularioRegistro->id_evento = $request->input('id_evento');
         if($request->input('preguntas') != null)
         {
-            $this->guardarPreguntas($request->input('preguntas'));
+            $this->guardarPreguntas($request->input('preguntas'), $request->input('id_evento'));
             $preguntas = $this->obtenerIdPreguntas($request->input('preguntas'));
             $formularioRegistro->preguntas = $preguntas;
             return $formularioRegistro;
