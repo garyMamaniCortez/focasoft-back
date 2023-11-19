@@ -1,24 +1,34 @@
-version: '3.8'
-
+version: '3'
 services:
-  mysql:
-    image: mysql:latest
-    restart: always
-    ports:
-      - 3307:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: focasoft
-    command: ["mysql", "-u root", "-p root", "focasoft", "-e", "source /script.sql"]
-
-  laravel:
-    build:
-      context: .
-      dockerfile: dockerfile
-    depends_on:
-      - mysql
-    ports:
-      - 8001:8000
+  app:
+    image: php:7.4-fpm
     volumes:
-      - ./:/var/www/html
-    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+      - .:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - focasoft-back
+
+  web:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - app
+    networks:
+      - focasoft-back
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: focasoft
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: focasoft
+      MYSQL_PASSWORD: root
+    networks:
+      - focasoft-back
+
+networks:
+  focasoft-back:
+    driver: bridge
