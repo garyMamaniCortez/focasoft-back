@@ -9,7 +9,8 @@ class FormularioRegistro extends Model
     protected $table = 'formulario';
     protected $fillable = [
         'id_evento',
-        'preguntas'
+        'preguntas',
+        'obligatorias'
     ];
     protected $hidden = [
         'created_at',

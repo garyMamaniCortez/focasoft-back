@@ -49,7 +49,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES (1,'Evento a toda leche de programacion','2023-11-30','taller_de_entrenamiento','Evento que te hara poner los pelos de punta',NULL,1,'2023-11-09 19:13:49','2023-11-08 16:44:25',NULL,'Ser la ostia','texto1,texto2,texto3','contacto1,contacto2,contacto3,contacto4',0),(2,'Clasificatorio interno individuales San Simon','2023-11-29','clasificatorio_interno','Evento interno a toda madre',NULL,2,'2023-11-15 03:03:52','2023-11-15 02:57:00',NULL,NULL,NULL,NULL,1);
+INSERT INTO `evento` VALUES (1,'Evento a toda leche de programacion','2023-11-30','taller_de_entrenamiento','Evento que te hara poner los pelos de punta',NULL,4,'2023-11-23 20:17:29','2023-11-08 16:44:25',NULL,'Ser la ostia','texto1,texto2,texto3','contacto1,contacto2,contacto3,contacto4',0),(2,'Clasificatorio interno individuales San Simon','2023-11-29','clasificatorio_interno','Evento interno a toda madre',NULL,3,'2023-11-23 20:16:38','2023-11-15 02:57:00',NULL,NULL,NULL,NULL,1);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,12 +93,13 @@ CREATE TABLE `formulario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_evento` int NOT NULL,
   `preguntas` text NOT NULL,
+  `obligatorias` text NOT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `formulario_ibfk_1` (`id_evento`),
   CONSTRAINT `formulario_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +108,7 @@ CREATE TABLE `formulario` (
 
 LOCK TABLES `formulario` WRITE;
 /*!40000 ALTER TABLE `formulario` DISABLE KEYS */;
-INSERT INTO `formulario` VALUES (1,1,'1,2,3,6,7','2023-11-09 02:45:28','2023-11-09 01:34:04'),(2,2,'8','2023-11-15 03:03:52','2023-11-15 03:03:52');
+INSERT INTO `formulario` VALUES (3,2,'8','1','2023-11-23 20:16:38','2023-11-23 20:16:38'),(4,1,'1,9,10,11','1,1,0,0','2023-11-23 20:55:30','2023-11-23 20:17:29');
 /*!40000 ALTER TABLE `formulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +267,7 @@ CREATE TABLE `pregunta` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +276,7 @@ CREATE TABLE `pregunta` (
 
 LOCK TABLES `pregunta` WRITE;
 /*!40000 ALTER TABLE `pregunta` DISABLE KEYS */;
-INSERT INTO `pregunta` VALUES (1,'Nombres','nombre',1,NULL,0,'2023-11-08 21:43:15','2023-11-08 21:43:15'),(2,'Apellidos','nombre',1,NULL,0,'2023-11-08 21:43:54','2023-11-08 21:43:54'),(3,'Fecha de Nacimiento','fecha_AFA',1,NULL,0,'2023-11-08 21:46:58','2023-11-08 21:46:58'),(4,'Correo Electronico','email',1,NULL,0,'2023-11-08 21:47:55','2023-11-08 21:47:55'),(5,'Numero Celular','telefono',1,NULL,0,'2023-11-08 21:48:50','2023-11-08 21:48:50'),(6,'Codigo SIS','texto',0,NULL,0,'2023-11-09 01:53:30','2023-11-09 01:53:30'),(7,'Talla Polera','texto',0,NULL,0,'2023-11-09 02:45:28','2023-11-09 02:45:28'),(8,'Nombre Equipo','texto',0,NULL,1,'2023-11-15 03:03:52','2023-11-15 03:03:52');
+INSERT INTO `pregunta` VALUES (1,'Nombres','nombre',1,NULL,0,'2023-11-08 21:43:15','2023-11-08 21:43:15'),(2,'Apellidos','nombre',1,NULL,0,'2023-11-08 21:43:54','2023-11-08 21:43:54'),(3,'Fecha de Nacimiento','fecha_AFA',1,NULL,0,'2023-11-08 21:46:58','2023-11-08 21:46:58'),(4,'Correo Electronico','email',1,NULL,0,'2023-11-08 21:47:55','2023-11-08 21:47:55'),(5,'Numero Celular','telefono',1,NULL,0,'2023-11-08 21:48:50','2023-11-08 21:48:50'),(6,'Codigo SIS','texto',0,NULL,0,'2023-11-09 01:53:30','2023-11-09 01:53:30'),(7,'Talla Polera','texto',0,NULL,0,'2023-11-09 02:45:28','2023-11-09 02:45:28'),(8,'Nombre Equipo','texto',0,NULL,1,'2023-11-15 03:03:52','2023-11-15 03:03:52'),(9,'Carrera','texto',0,NULL,0,'2023-11-23 20:17:28','2023-11-23 20:17:28'),(10,'Ciudad','texto',0,NULL,0,'2023-11-23 20:19:46','2023-11-23 20:19:46'),(11,'Pais','texto',0,NULL,0,'2023-11-23 20:20:20','2023-11-23 20:20:20');
 /*!40000 ALTER TABLE `pregunta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,4 +351,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-14 23:06:35
+-- Dump completed on 2023-11-23 17:48:12

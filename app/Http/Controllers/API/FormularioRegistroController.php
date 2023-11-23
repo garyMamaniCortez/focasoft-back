@@ -63,8 +63,7 @@ class FormularioRegistroController extends Controller
     public function formulario($id)
     {
         $formularioRegistro = FormularioRegistro::find($id);
-        $preguntas = $formularioRegistro->preguntas;
-        return $this->mostrarFormulario($preguntas);
+        return $this->mostrarFormulario($formularioRegistro);
     }
 
     /**
@@ -103,13 +102,17 @@ class FormularioRegistroController extends Controller
         //
     }
 
-    private function mostrarFormulario($preguntas)
+    private function mostrarFormulario($formularioRegistro)
     {
         $Pregunta = new Pregunta;
-        $arrayPreguntas = $this->stringToArray($preguntas);
+        $arrayPreguntas = $this->stringToArray($formularioRegistro->preguntas);
+        $arrayObligatorias = $this->stringToArray($formularioRegistro->obligatorias);
         $formulario = array();
         foreach ($arrayPreguntas as $pregunta) {
-            array_push($formulario, Pregunta::where('id',$pregunta)->first());
+            $prePregunta = Pregunta::select('id','texto_pregunta','tipo','obligatorio')
+                                    ->where('id',$pregunta)->first();
+            $prePregunta->obligatorio = array_shift($arrayObligatorias);
+            array_push($formulario, $prePregunta);
         }
         return $formulario;
     }
@@ -119,8 +122,8 @@ class FormularioRegistroController extends Controller
         $evento = Evento::find($idEvento);
         foreach ($preguntas as $pregunta) {
             $request = new Request([
-                'texto_pregunta' => $pregunta,
-                'tipo' => 'texto',
+                'texto_pregunta' => $pregunta['pregunta'],
+                'tipo' => $pregunta['tipo'],
                 'equipo' => $evento->equipo,
                 'obligatorio' => false,
                 'opciones' => null
@@ -142,6 +145,8 @@ class FormularioRegistroController extends Controller
         {
             $this->guardarPreguntas($request->input('preguntas'), $request->input('id_evento'));
             $preguntas = $this->obtenerIdPreguntas($request->input('preguntas'));
+            $obligatorias = $this->obtenerPreguntasObligatorias($request->input('preguntas'));
+            $formularioRegistro->obligatorias = $obligatorias;
             $formularioRegistro->preguntas = $preguntas;
             return $formularioRegistro;
         }
@@ -154,9 +159,17 @@ class FormularioRegistroController extends Controller
         $arrayPreguntas = array();
         foreach ($preguntas as $pregunta) {
             $idPregunta = Pregunta::select('id')
-                                    ->where('texto_pregunta', $pregunta)
+                                    ->where('texto_pregunta', $pregunta['pregunta'])
                                     ->first();
             array_push($arrayPreguntas, $idPregunta->id);
+        }
+        return $this->arrayToString($arrayPreguntas);
+    }
+    private function obtenerPreguntasObligatorias($preguntas)
+    {
+        $arrayPreguntas = array();
+        foreach ($preguntas as $pregunta) {
+            array_push($arrayPreguntas, $pregunta['obligatorio'] ? 1: 0);
         }
         return $this->arrayToString($arrayPreguntas);
     }
