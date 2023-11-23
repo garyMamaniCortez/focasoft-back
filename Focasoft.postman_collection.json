@@ -392,7 +392,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 2,\n    \"preguntas\": [\n        \"Nombre Equipo\"\n    ]\n}",
+							"raw": "{\n    \"id_evento\": 1,\n    \"preguntas\": [\n        {\n            \"pregunta\": \"Nombres\",\n            \"obligatorio\": true,\n            \"tipo\": \"texto\"\n        },\n        {\n            \"pregunta\": \"Carrera\",\n            \"obligatorio\": true,\n            \"tipo\": \"texto\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -424,7 +424,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 1,\n    \"preguntas\": [\n        \"Nombres\",\n        \"Apellidos\",\n        \"Fecha de Nacimiento\",\n        \"Codigo SIS\",\n        \"Talla Polera\"\n    ]\n}",
+							"raw": "{\n    \"id_evento\": 1,\n    \"preguntas\": [\n        {\n            \"pregunta\": \"Nombres\",\n            \"obligatorio\": true,\n            \"tipo\": \"texto\"\n        },\n        {\n            \"pregunta\": \"Carrera\",\n            \"obligatorio\": true,\n            \"tipo\": \"texto\"\n        },\n        {\n            \"pregunta\": \"Ciudad\",\n            \"obligatorio\": false,\n            \"tipo\": \"texto\"\n        },\n        {\n            \"pregunta\": \"Pais\",\n            \"obligatorio\": false,\n            \"tipo\": \"texto\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -432,7 +432,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/1",
+							"raw": "localhost:8000/api/formularios/registro/4",
 							"host": [
 								"localhost"
 							],
@@ -441,7 +441,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -453,7 +453,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/1",
+							"raw": "localhost:8000/api/formularios/registro/4",
 							"host": [
 								"localhost"
 							],
@@ -462,7 +462,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"1"
+								"4"
 							]
 						}
 					},
