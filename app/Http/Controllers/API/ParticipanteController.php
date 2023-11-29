@@ -200,10 +200,10 @@ class ParticipanteController extends Controller
         $cumple = false;
         switch ($pregunta->tipo) {
             case 'nombre':
-                $cumple = ctype_alpha($respuesta);
+                $cumple = ctype_alpha(trim(str_replace(' ','',$respuesta)));
                 break;
             case 'texto':
-                $cumple = ctype_alnum($respuesta);
+                $cumple = ctype_alnum(trim(str_replace(' ','',$respuesta)));
                 break;
             case 'telefono':
                 $cumple = ctype_digit($respuesta);
