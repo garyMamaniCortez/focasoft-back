@@ -18,10 +18,10 @@ class Evento extends Model
         'id_formulario',
         'requisitos',
         'premios',
-        'contactos'
+        'contactos',
+        'updated_at'
     ];
     protected $hidden = [
-        'created_at',
-        'updated_at'
+        'created_at'
     ];
 }
