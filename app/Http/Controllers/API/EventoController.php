@@ -228,16 +228,13 @@ class EventoController extends Controller
 
     private function isValidTittle(Request $request)
     {
-        $eventos = Evento::all();
-        $response = true;
-        foreach ($eventos as $evento)
-        {
-            if($evento->titulo === $request->input('titulo'))
-            {
-                $response = false;
-            }
-        }
-        return $response;
+        $titulos = Evento::select('titulo')
+                                ->where('titulo', $request->input('titulo'))
+                                //->where('titulo','like',"%{$request->input('titulo')}%")
+                                ->get();
+        if(count($titulos) == 0)
+            return true;
+
     }
 
     private function isValidTittleWithId(Request $request, $id)
