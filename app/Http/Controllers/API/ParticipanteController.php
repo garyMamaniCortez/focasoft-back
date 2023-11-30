@@ -21,12 +21,21 @@ class ParticipanteController extends Controller
      */
     public function index(Request $request)
     {
-        $formulario = FormularioRegistro::where('id_evento', $request->input('id_evento'))->first();
-        $respuestas = Respuesta::where('id_formulario', $formulario->id)->get();
-        $participantes = $this->limpiarDatos($respuestas,$this->stringToArray($formulario->preguntas));
+        $participantes = $this->participantes($request->input('id_evento'));
         return response()->json($participantes);
     }
 
+    public function participantes($idEvento)
+    {
+        $formulario = FormularioRegistro::where('id_evento', $idEvento)->first();
+        if($formulario != null)
+        {
+            $respuestas = Respuesta::where('id_formulario', $formulario->id)->get();
+            $participantes = $this->limpiarDatos($respuestas,$this->stringToArray($formulario->preguntas));
+            return count($participantes);
+        }
+        return null;
+    }
     /**
      * Store a newly created resource in storage.
      *
