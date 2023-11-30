@@ -111,7 +111,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"busqueda\": \"11\"\n}",
+									"raw": "{\n    \"busqueda\": \"2\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -508,7 +508,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/3",
+							"raw": "localhost:8000/api/formularios/registro/4",
 							"host": [
 								"localhost"
 							],
@@ -517,7 +517,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"3"
+								"4"
 							]
 						}
 					},
@@ -530,7 +530,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 2\n}",
+							"raw": "{\n    \"id_evento\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,6 +547,36 @@
 								"api",
 								"formularios",
 								"participantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participantes Buscar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_evento\": 1,\n    \"busqueda\": \"informatica\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/formularios/participantes/buscar",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"participantes",
+								"buscar"
 							]
 						}
 					},
@@ -580,7 +610,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_formulario\" : 3,\n    \"respuestas\":[\n        {\n            \"pregunta\": \"Nombre Equipo\",\n            \"respuesta\": \"Equipo Alpha\"\n        }\n    ]\n}",
+							"raw": "{\n    \"id_formulario\" : 4,\n    \"respuestas\":[\n        {\n            \"pregunta\": \"Nombres\",\n            \"respuesta\": \"Adrian Camara\"\n        },\n        {\n            \"pregunta\": \"Carrera\",\n            \"respuesta\": \"Informatica\"\n        },\n        {\n            \"pregunta\": \"Ciudad\",\n            \"respuesta\": \"Cochabamba\"\n        },\n        {\n            \"pregunta\": \"Pais\",\n            \"respuesta\": \"Bolivia\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
