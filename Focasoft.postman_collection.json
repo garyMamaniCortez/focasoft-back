@@ -133,6 +133,65 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Participantes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_evento\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/formularios/participantes",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"formularios",
+										"participantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Participantes Buscar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_evento\": 1,\n    \"busqueda\": \"sistemas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/formularios/participantes/buscar",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"formularios",
+										"participantes",
+										"buscar"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -475,6 +534,27 @@
 				{
 					"name": "Registro",
 					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/formularios/registro/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"formularios",
+								"registro",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -497,86 +577,6 @@
 								"formularios",
 								"registro",
 								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registro",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/formularios/registro/4",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"formularios",
-								"registro",
-								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Participantes",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/formularios/participantes",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"formularios",
-								"participantes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Participantes Buscar",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 1,\n    \"busqueda\": \"informatica\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/formularios/participantes/buscar",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"formularios",
-								"participantes",
-								"buscar"
 							]
 						}
 					},
