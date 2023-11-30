@@ -32,7 +32,7 @@ class ParticipanteController extends Controller
         {
             $respuestas = Respuesta::where('id_formulario', $formulario->id)->get();
             $participantes = $this->limpiarDatos($respuestas,$this->stringToArray($formulario->preguntas));
-            return count($participantes);
+            return $participantes;
         }
         return null;
     }
