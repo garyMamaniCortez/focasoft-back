@@ -196,6 +196,141 @@
 					]
 				},
 				{
+					"name": "Evento Externo",
+					"item": [
+						{
+							"name": "Eventos Externos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/eventos/externos",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"eventos",
+										"externos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evento Externo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Taller de programacion Univeridad Catolica 2023",
+											"type": "text"
+										},
+										{
+											"key": "fecha_ini",
+											"value": "2023-12-28",
+											"type": "text"
+										},
+										{
+											"key": "fecha_fin",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "descripcion",
+											"value": "Taller de programacion se llevara a cabo en la univerisdad Catolica el 29 de diciembre del presente año",
+											"type": "text"
+										},
+										{
+											"key": "afiche",
+											"type": "file",
+											"src": "/home/gary/Imágenes/Capturas de pantalla/Captura desde 2023-11-21 11-41-27.png"
+										},
+										{
+											"key": "url",
+											"value": "www.catolica.com/eventos/EventoDeProgramacion",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8000/api/evento/externo",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"externo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evento Externo Imagen",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "image/png",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8000/api/evento/externo/imagen/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"externo",
+										"imagen",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evento Externo",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8000/api/evento/externo/3",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"externo",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Eventos",
 					"request": {
 						"method": "GET",
@@ -281,7 +416,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8000/api/evento/imagen/1",
+							"raw": "localhost:8000/api/evento/imagen/6",
 							"host": [
 								"localhost"
 							],
@@ -290,7 +425,7 @@
 								"api",
 								"evento",
 								"imagen",
-								"1"
+								"6"
 							]
 						}
 					},
