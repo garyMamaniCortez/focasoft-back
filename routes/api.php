@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EventoController;
+use App\Http\Controllers\API\EventoExternoController;
 use App\Http\Controllers\API\FormularioRegistroController;
 use App\Http\Controllers\API\ParticipanteController;
 use App\Http\Controllers\API\PatrocinadorController;
@@ -37,6 +38,11 @@ Route::put('/evento/{id}',[EventoController::class, 'update']);
 Route::get('/evento/imagen/{id}',[EventoController::class, 'getImage']);
 Route::post('/evento/buscar', [EventoController::class, 'buscar']);
 //Route::post('/evento/agregarFormulario', [EventoController::class, 'agregarFormulario']);
+
+Route::get('/eventos/externos',[EventoExternoController::class, 'index']);
+Route::get('/evento/externo/{id}',[EventoExternoController::class, 'show']);
+Route::post('/evento/externo',[EventoExternoController::class, 'store']);
+Route::get('/evento/externo/imagen/{id}',[EventoExternoController::class, 'getImage']);
 
 Route::get('/formularios/registros',[FormularioRegistroController::class, 'index']);
 Route::get('/formularios/registro/{id}',[FormularioRegistroController::class, 'show']);
