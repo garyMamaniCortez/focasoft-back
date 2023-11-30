@@ -9,6 +9,7 @@ use App\Models\Evento;
 use App\Models\Patrocinador;
 use App\Models\PatrocinadorEvento;
 use App\Http\Controllers\API\PatrocinadorController;
+use App\Http\Controllers\API\ParticipanteController;
 use DateTime;
 
 class EventoController extends Controller
@@ -20,11 +21,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::latest('fecha_ini')->get();
-        foreach ($eventos as $evento)
-        {
-            $evento = $this->translateEvento($evento);
-        }
+        $eventos = $this->eventos();
         return response()->json($eventos);
     }
 
@@ -128,15 +125,41 @@ class EventoController extends Controller
         return response()->json($evento, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function reporte()
     {
-        //
+        $eventos = $this->limpiarReporte($this->eventos());
+        return response()->json($eventos, 200);
+    }
+    public function buscarReporte(Request $request)
+    {
+        $eventos = $this->limpiarReporte($this->eventos());
+        $busqueda = strtolower($request->input('busqueda'));
+        $encontrados = array();
+        foreach ($eventos as $evento) {
+            $titulo = strtolower($evento->titulo);
+            $fecha = strtolower($evento->fecha_ini);
+            $tipo = strtolower($evento->tipo);
+            $participantes = strtolower($evento->participantes);
+
+            if(str_contains($titulo, $busqueda)
+                    ||str_contains($fecha, $busqueda)
+                    ||str_contains($tipo, $busqueda)
+                    ||str_contains($participantes, $busqueda))
+                array_push($encontrados, $evento);
+        }
+        return response()->json($encontrados, 200);
+    }
+    private function limpiarReporte($eventos)
+    {
+        $participanteController = new ParticipanteController();
+        foreach ($eventos as $evento) {
+            $participantes = $participanteController->participantes($evento->id);
+            if ($participantes == null)
+                $participantes = 0;
+            unset($evento->descripcion, $evento->afiche, $evento->updated_at, $evento->id_formulario, $evento->fecha_fin, $evento->requisitos, $evento->premios, $evento->contactos, $evento->patrocinadores);
+            $evento->participantes = $participantes;
+        }
+        return $eventos;
     }
 
     public function agregarFormulario(Request $request)
@@ -376,5 +399,14 @@ class EventoController extends Controller
                     $patrocinadorEvento->save();
                 }
             }
+    }
+
+    private function eventos(){
+        $eventos = Evento::latest('fecha_ini')->get();
+        foreach ($eventos as $evento)
+        {
+            $evento = $this->translateEvento($evento);
+        }
+        return $eventos;
     }
 }

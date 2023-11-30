@@ -54,3 +54,6 @@ Route::post('/patrocinador',[PatrocinadorController::class, 'store']);
 
 Route::get('/formulario/preguntas/{idEvento}',[PreguntaController::class, 'index']);
 Route::post('/formulario/pregunta',[PreguntaController::class, 'store']);
+
+Route::get('/reporte/eventos',[EventoController::class, 'reporte']);
+Route::post('/reporte/eventos/buscar',[EventoController::class, 'buscarReporte']);
