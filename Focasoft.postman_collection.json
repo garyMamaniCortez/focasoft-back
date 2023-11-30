@@ -82,6 +82,61 @@
 					]
 				},
 				{
+					"name": "Reporte",
+					"item": [
+						{
+							"name": "Eventos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/reporte/eventos",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reporte",
+										"eventos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eventos Buscar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"busqueda\": \"11\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/reporte/eventos/buscar",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reporte",
+										"eventos",
+										"buscar"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Eventos",
 					"request": {
 						"method": "GET",
@@ -106,7 +161,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "127.0.0.1:8000/api/evento/1",
+							"raw": "127.0.0.1:8000/api/evento/4",
 							"host": [
 								"127",
 								"0",
@@ -117,7 +172,7 @@
 							"path": [
 								"api",
 								"evento",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -192,12 +247,12 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "Clasificatorio interno individuales San Simon",
+									"value": "TALLER de entrenamiento a las clasificatorios ICPC 2024",
 									"type": "text"
 								},
 								{
 									"key": "fecha_ini",
-									"value": "2023-11-29",
+									"value": "2024-11-29",
 									"type": "text"
 								},
 								{
@@ -207,22 +262,22 @@
 								},
 								{
 									"key": "tipo",
-									"value": "Clasificatorio interno",
+									"value": "Taller de entrenamiento",
 									"type": "text"
 								},
 								{
 									"key": "descripcion",
-									"value": "Evento interno a toda madre",
+									"value": "Taller de entrenamiento en algoritmos para preparar a los estudiantes para las competencias ICPC",
 									"type": "text"
 								},
 								{
 									"key": "afiche",
 									"type": "file",
-									"src": "/home/gary/Imágenes/Capturas de pantalla/Captura desde 2023-11-01 06-48-25.png"
+									"src": []
 								},
 								{
 									"key": "equipo",
-									"value": "true",
+									"value": "false",
 									"type": "text"
 								}
 							]
@@ -453,7 +508,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/formularios/registro/4",
+							"raw": "localhost:8000/api/formularios/registro/3",
 							"host": [
 								"localhost"
 							],
@@ -462,7 +517,7 @@
 								"api",
 								"formularios",
 								"registro",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -475,7 +530,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_evento\": 1\n}",
+							"raw": "{\n    \"id_evento\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -525,7 +580,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_formulario\" : 1,\n    \"respuestas\":[\n        {\n            \"pregunta\": \"Nombres\",\n            \"respuesta\": \"Nath\"\n        },\n        {\n            \"pregunta\": \"Apellidos\",\n            \"respuesta\": \"Garcia\"\n        },\n        {\n            \"pregunta\": \"Fecha de Nacimiento\",\n            \"respuesta\": \"2000-10-10\"\n        },\n        {\n            \"pregunta\": \"Codigo SIS\",\n            \"respuesta\": \"20194292\"\n        },\n        {\n            \"pregunta\": \"Talla Polera\",\n            \"respuesta\": \"S\"\n        }\n    ]\n}",
+							"raw": "{\n    \"id_formulario\" : 3,\n    \"respuestas\":[\n        {\n            \"pregunta\": \"Nombre Equipo\",\n            \"respuesta\": \"Equipo Alpha\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
