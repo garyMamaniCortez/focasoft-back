@@ -44,6 +44,7 @@ Route::post('/formularios/registro',[FormularioRegistroController::class, 'store
 Route::put('/formularios/registro/{id}',[FormularioRegistroController::class, 'update']);
 
 Route::post('/formularios/participantes',[ParticipanteController::class, 'index']);
+Route::post('/formularios/participantes/buscar',[ParticipanteController::class, 'buscar']);
 Route::get('/formularios/participante/{id}',[ParticipanteController::class, 'show']);
 Route::post('/formularios/participante',[ParticipanteController::class, 'store']);
 Route::put('/formularios/participante/{id}',[ParticipanteController::class, 'update']);

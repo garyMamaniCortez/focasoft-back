@@ -156,6 +156,8 @@ class EventoController extends Controller
             $participantes = $participanteController->participantes($evento->id);
             if ($participantes == null)
                 $participantes = 0;
+            else
+                $participantes = count($participantes);
             unset($evento->descripcion, $evento->afiche, $evento->updated_at, $evento->id_formulario, $evento->fecha_fin, $evento->requisitos, $evento->premios, $evento->contactos, $evento->patrocinadores);
             $evento->participantes = $participantes;
         }

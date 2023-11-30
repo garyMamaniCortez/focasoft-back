@@ -22,9 +22,24 @@ class ParticipanteController extends Controller
     public function index(Request $request)
     {
         $participantes = $this->participantes($request->input('id_evento'));
-        return response()->json($participantes);
+        return response()->json($participantes,200);
     }
 
+    public function buscar(Request $request)
+    {
+        $participantes = $this->participantes($request->input('id_evento'));
+        $busqueda = strtolower($request->input('busqueda'));
+        $encontrados = array();
+        foreach ($participantes as $participante) {
+            foreach ($participante as $campo => $valor) {
+                if(str_contains(strtolower($valor), $busqueda))
+                    if(!in_array($participante, $encontrados))
+                        array_push($encontrados, $participante);
+            }
+        }
+        return response()->json($encontrados, 200);
+        //return response()->json(array_unique($encontrados, SORT_REGULAR), 200);
+    }
     public function participantes($idEvento)
     {
         $formulario = FormularioRegistro::where('id_evento', $idEvento)->first();
@@ -32,7 +47,7 @@ class ParticipanteController extends Controller
         {
             $respuestas = Respuesta::where('id_formulario', $formulario->id)->get();
             $participantes = $this->limpiarDatos($respuestas,$this->stringToArray($formulario->preguntas));
-            return count($participantes);
+            return $participantes;
         }
         return null;
     }
