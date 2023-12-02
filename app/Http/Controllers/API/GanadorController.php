@@ -51,6 +51,7 @@ class GanadorController extends Controller
         $posiciones = array();
         foreach ($participantes as $participante) {
             $posicionParticipante = Participante::find($participante['id']);
+            $posicion = new Participante;
             $posicion->nombre = $evento->equipo ? $participante['Nombre Equipo'] : $participante['Nombres'];
             $posicion->posicion = $posicionParticipante->posicion;
             array_push($posiciones, $posicion);
