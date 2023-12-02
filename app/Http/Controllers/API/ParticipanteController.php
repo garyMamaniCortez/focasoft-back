@@ -9,6 +9,7 @@ use App\Models\Participante;
 use App\Models\Respuesta;
 use App\Models\Pregunta;
 use App\Models\FormularioRegistro;
+use App\Models\Evento;
 use App\Http\Controllers\API\FormularioRegistroController;
 use DateTime;
 
@@ -59,6 +60,9 @@ class ParticipanteController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$this->eventoActual($request->input('id_formulario')))
+            return response()->json(['error' => 'El formulario ya no acepta respuestas'],400);
+
         $participante = $this->createParticipante($request, null);
         $guardado = $this->guardarRespuestas($request, $participante);
         if($guardado === 'incompleto')
@@ -243,5 +247,16 @@ class ParticipanteController extends Controller
                 break;
         }
         return $cumple;
+    }
+
+    private function eventoActual($id_formulario)
+    {
+        $evento = Evento::select('fecha_ini')
+                            ->where('id_formulario', $id_formulario)
+                            ->first();
+        if (new DateTime() > new DateTime($evento->fecha_ini))
+            return false;
+
+        return true;
     }
 }
