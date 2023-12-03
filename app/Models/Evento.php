@@ -19,6 +19,7 @@ class Evento extends Model
         'requisitos',
         'premios',
         'contactos',
+        'ganadores',
         'updated_at'
     ];
     protected $hidden = [
