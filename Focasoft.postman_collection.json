@@ -331,6 +331,134 @@
 					]
 				},
 				{
+					"name": "Ganadores",
+					"item": [
+						{
+							"name": "Evento Ganadores",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "excel",
+											"type": "file",
+											"src": "/home/gary/Descargas/Participantes Evento a toda leche de programacion.xlsx"
+										},
+										{
+											"key": "id_evento",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8000/api/evento/ganadores",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"ganadores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evento Ganadores",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "excel",
+											"type": "file",
+											"src": "/home/gary/Descargas/posiciones.xlsx"
+										},
+										{
+											"key": "id_evento",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8000/api/evento/ganadores/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"ganadores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Evento Excel Ganadores",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "excel",
+											"type": "file",
+											"src": "/home/gary/Descargas/posiciones.xlsx"
+										},
+										{
+											"key": "id_evento",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8000/api/evento/excel/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"evento",
+										"excel",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Eventos",
 					"request": {
 						"method": "GET",
@@ -529,7 +657,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Evento a toda leche de programacion\",\n    \"fecha_ini\": \"2023-11-30\",\n    \"fecha_fin\": null,\n    \"tipo\": \"Taller de entrenamiento\",\n    \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n    \"afiche\": null,\n    \"id_formulario\": null,\n    \"requisitos\": \"Ser la ostia\",\n    \"premios\": [\n        \"texto1\",\n        \"texto2\",\n        \"texto3\"\n    ],\n    \"patrocinadores\": [\n        \"Unosquare\",\n        \"Nice\",\n        \"JalaSoft\",\n        \"Encora\",\n        \"AssureSoft\"\n    ],\n    \"contactos\": [\n        \"contacto1\",\n        \"contacto2\",\n        \"contacto3\",\n        \"contacto4\"\n    ]\n}",
+							"raw": "{\n        \"id\": 1,\n        \"titulo\": \"Evento a toda leche de programacion\",\n        \"fecha_ini\": \"2023-12-30\",\n        \"tipo\": \"Competencia de entrenamiento\",\n        \"descripcion\": \"Evento que te hara poner los pelos de punta\",\n        \"afiche\": null,\n        \"id_formulario\": 4,\n        \"fecha_fin\": null,\n        \"requisitos\": [\n            \"Ser la ostia\"\n        ],\n        \"premios\": [\n            \"texto1\",\n            \"texto2\",\n            \"texto3\"\n        ],\n        \"contactos\": [\n            \"contacto1\",\n            \"contacto2\",\n            \"contacto3\",\n            \"contacto4\"\n        ],\n        \"equipo\": 0,\n        \"ganadores\": null,\n        \"patrocinadores\": [\n            \"Unosquare\",\n            \"Nice\",\n            \"JalaSoft\",\n            \"Encora\",\n            \"AssureSoft\"\n        ]\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
