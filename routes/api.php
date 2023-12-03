@@ -47,6 +47,7 @@ Route::get('/evento/externo/imagen/{id}',[EventoExternoController::class, 'getIm
 
 Route::post('/evento/ganadores',[GanadorController::class, 'store']);
 Route::get('/evento/ganadores/{id}',[GanadorController::class, 'show']);
+Route::get('/evento/excel/{id}',[GanadorController::class, 'export']);
 
 Route::get('/formularios/registros',[FormularioRegistroController::class, 'index']);
 Route::get('/formularios/registro/{id}',[FormularioRegistroController::class, 'show']);

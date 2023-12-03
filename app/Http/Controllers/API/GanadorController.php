@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Participante;
 use App\Models\Evento;
 use App\Imports\ParticipanteImport;
+use App\Exports\ParticipanteExport;
 use App\Http\Controllers\API\ParticipanteController;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -57,6 +58,22 @@ class GanadorController extends Controller
             array_push($posiciones, $posicion);
         }
         return response()->json($posiciones, 200);
+    }
+
+    public function export($id)
+    {
+        if(!$this->eventoValido($id))
+            return response()->json(['error' => 'El tipo de evento no permite tener ganadores'],400);
+        $evento = Evento::find($id);
+
+        $participanteController = new ParticipanteController;
+        $participantes = $participanteController->participantes($id);
+
+        foreach($participantes as $participante)
+            $participante['posicion'] = null;
+
+        $export = new ParticipanteExport($participantes);
+        return Excel::download($export, "Participantes $evento->titulo.xlsx");
     }
 
     private function eventoValido($idEvento)
