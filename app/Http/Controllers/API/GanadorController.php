@@ -68,6 +68,8 @@ class GanadorController extends Controller
 
         $participanteController = new ParticipanteController;
         $participantes = $participanteController->participantes($id);
+	if($participantes == null)
+	    return response()->json(['error' => 'El evento no tiene participantes registrados'],400);
 
         foreach($participantes as $participante)
             $participante['posicion'] = null;
