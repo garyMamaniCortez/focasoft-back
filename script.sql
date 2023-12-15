@@ -204,19 +204,18 @@ DROP TABLE IF EXISTS `patrocinador`;
 CREATE TABLE `patrocinador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
+  `pagina_web` varchar(255) NOT NULL,
+  `logo` mediumblob,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `patrocinador`
---
 
 LOCK TABLES `patrocinador` WRITE;
 /*!40000 ALTER TABLE `patrocinador` DISABLE KEYS */;
-INSERT INTO `patrocinador` VALUES (1,'Unosquare','2023-11-08 16:44:46','2023-11-08 16:44:46'),(2,'Nice','2023-11-08 16:44:46','2023-11-08 16:44:46'),(3,'JalaSoft','2023-11-08 16:44:46','2023-11-08 16:44:46'),(4,'Encora','2023-11-08 16:44:46','2023-11-08 16:44:46'),(5,'AssureSoft','2023-11-08 16:44:47','2023-11-08 16:44:47');
+INSERT INTO `patrocinador` VALUES (1,'Unosquare','www.unosquare.com',NULL,'2023-11-08 16:44:46','2023-11-08 16:44:46'),(2,'Nice','www.nice.com',NULL,'2023-11-08 16:44:46','2023-11-08 16:44:46'),(3,'JalaSoft','www.jalasoft.com',NULL,'2023-11-08 16:44:46','2023-11-08 16:44:46'),(4,'Encora','www.encora.com',NULL,'2023-11-08 16:44:46','2023-11-08 16:44:46'),(5,'AssureSoft','www.assuresoft.com',NULL,'2023-11-08 16:44:47','2023-11-08 16:44:47');
 /*!40000 ALTER TABLE `patrocinador` ENABLE KEYS */;
 UNLOCK TABLES;
 
