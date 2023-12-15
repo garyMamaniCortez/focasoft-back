@@ -63,6 +63,7 @@ Route::put('/formularios/participante/{id}',[ParticipanteController::class, 'upd
 Route::get('/patrocinadores',[PatrocinadorController::class, 'index']);
 Route::get('/patrocinador/{id}',[PatrocinadorController::class, 'show']);
 Route::post('/patrocinador',[PatrocinadorController::class, 'store']);
+Route::get('/patrocinador/imagen/{id}',[PatrocinadorController::class, 'getImage']);
 
 Route::get('/formulario/preguntas/{idEvento}',[PreguntaController::class, 'index']);
 Route::post('/formulario/pregunta',[PreguntaController::class, 'store']);

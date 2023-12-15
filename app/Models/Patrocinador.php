@@ -10,7 +10,9 @@ class Patrocinador extends Model
     protected $table = 'patrocinador';
     protected $fillable = [
         'id',
-        'nombre'
+        'nombre',
+        'pagina_web',
+        'logo'
     ];
     protected $hidden = [
         'created_at',
